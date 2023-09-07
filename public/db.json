@@ -50,7 +50,37 @@
             "buckleType": "Folding Clasp"
         },
         "specialFeatures": ["291 diamonds", "20.54 carats", "118 baguette-cut emeralds - 7.87 carats"],
-        "video": "https://static.patek.com/videos/articles/5531G_001/PP_5531G_001_desktop-banner.mp4",
+        "video": "https://static.patek.com/videos/articles/6300_403G_001/PP_6300_403G_001_desktop-banner.mp4",
+        "images": ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
+        "thumbnails": ["1t.webp", "2t.webp", "3t.webp", "4t.webp", "5t.webp", "6t.webp", "7t.webp", "8t.webp"]
+    },
+    {
+        "id": 3,
+        "name": "Grand Complications Minute Repeater, Tourbillon, Retrograde Perpetual Calendar",
+        "brand": "Patek Philippe",
+        "price": "929040",
+        "features": {
+            "reference": "5316/50P-001",
+            "collection": "Grand Complications",
+            "caseSize": "40.20mm",
+            "caseMaterial": "Platinum",
+            "movement": "Manual",
+            "caliber": "R TO 27 PS QR, In-house",
+            "powerReserve": "48 hours",
+            "dateAdded": "March 31, 2023",
+            "dialColor": "Blue",
+            "dialMaterial": "Sapphire",
+            "dialFinish": "Fumé",
+            "caseBack": "Open",
+            "strapMaterial": "Leather",
+            "strapColor": "Blue",
+            "buckleType": "Folding Clasp"
+        },
+        "specialFeatures": [
+            "Interchangeable solid and sapphire crystal case backs",
+            "Humidity- and dust-protected only"
+        ],
+        "video": "https://static.patek.com/videos/articles/5316_50P_001/PP_5316_50P_001_desktop-banner.mp4",
         "images": ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
         "thumbnails": ["1t.webp", "2t.webp", "3t.webp", "4t.webp", "5t.webp", "6t.webp", "7t.webp", "8t.webp"]
     }
