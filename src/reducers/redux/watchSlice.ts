@@ -16,7 +16,7 @@ const initialState: WatchState = {
 /* ---------------------------------- Fetch --------------------------------- */
 const fetchDataGet = createAsyncThunk('fetchWatchs', async (url: string) => {
     const response = fetch(url)
-        .then(async (response) => await response.json())
+        .then(async (res) => await res.json())
         .then((data) => {
             return data
         })
