@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
 import { type Watch } from './watchInterface'
 
-interface WatchesState {
+interface WatchState {
     watches: Watch[]
     isLoading: boolean
     error: string | undefined
 }
 
-const initialState: WatchesState = {
+const initialState: WatchState = {
     watches: [],
     isLoading: false,
     error: undefined,
