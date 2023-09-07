@@ -9,16 +9,19 @@ interface WatchState {
 
 const initialState: WatchState = {
     watches: [],
-    isLoading: false,
+    isLoading: true,
     error: undefined,
 }
 
 /* ---------------------------------- Fetch --------------------------------- */
-const fetchDataGet = createAsyncThunk('fetchPosts', async (url: string) => {
+const fetchDataGet = createAsyncThunk('fetchWatchs', async (url: string) => {
     const response = fetch(url)
         .then(async (response) => await response.json())
         .then((data) => {
             return data
+        })
+        .catch((error) => {
+            console.log(error)
         })
     return await response
 })
@@ -42,7 +45,7 @@ const WatchSlice = createSlice({
             console.log('Error', action.error.message)
             state = {
                 ...state,
-                isLoading: false,
+                isLoading: true,
                 error: action.error.message,
             }
         })
