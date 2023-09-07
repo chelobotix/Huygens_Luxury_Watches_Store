@@ -83,5 +83,30 @@
         "video": "https://static.patek.com/videos/articles/5316_50P_001/PP_5316_50P_001_desktop-banner.mp4",
         "images": ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
         "thumbnails": ["1t.webp", "2t.webp", "3t.webp", "4t.webp", "5t.webp", "6t.webp", "7t.webp", "8t.webp"]
+    },
+    {
+        "id": 4,
+        "name": "Gondolo Serata",
+        "brand": "Patek Philippe",
+        "price": "38,060",
+        "features": {
+            "reference": "4962/200R-001",
+            "collection": "Gondolo",
+            "caseSize": "28.6 x 40.85mm",
+            "caseMaterial": "Rose Gold",
+            "movement": "Quartz",
+            "caliber": "E 15, In-house",
+            "dateAdded": "March 31, 2023",
+            "dialColor": "Artistic Dial, Brown",
+            "dialFinish": "Lacquered",
+            "caseBack": "Closed",
+            "strapMaterial": "Leather",
+            "strapColor": "Brown",
+            "buckleType": "Pin"
+        },
+        "specialFeatures": ["Water resistance 30m/3 bar", "94 spessartites “cognac” to “mandarine” tones: 2.02 cts."],
+        "video": "https://static.patek.com/videos/articles/4962_200R_001/PP_4962_200R_001_desktop-banner.mp4",
+        "images": ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp", "7.webp", "8.webp"],
+        "thumbnails": ["1t.webp", "2t.webp", "3t.webp", "4t.webp", "5t.webp", "6t.webp", "7t.webp", "8t.webp"]
     }
 ]
