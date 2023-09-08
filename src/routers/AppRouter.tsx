@@ -7,6 +7,7 @@ import { Header } from '../pages/Header/Header'
 import { Home } from '../pages/Home/Home'
 import { Brands } from '../pages/Brands/Brands'
 import { Brand } from '../pages/Brand/Brand'
+import { NewArrivals } from '../pages/NewArrivals/NewArrivals'
 
 const AppRouter: React.FC = () => {
     return (
@@ -17,6 +18,7 @@ const AppRouter: React.FC = () => {
                     <Route index element={<Home />} />
                     <Route path="about" element={<About />} />
                     <Route path="brands" element={<Brands />} />
+                    <Route path="newarrivals" element={<NewArrivals />} />
                     <Route path="brands/:brand" element={<Brand />} />
 
                     {/* with parameters */}
