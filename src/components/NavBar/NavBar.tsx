@@ -10,13 +10,18 @@ const NavBar: React.FC = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/about" className={(navData) => (navData.isActive ? 'active' : '')}>
-                        About
+                    <NavLink to="/brands" className={(navData) => (navData.isActive ? 'active' : '')}>
+                        Brands
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/brands" className={(navData) => (navData.isActive ? 'active' : '')}>
-                        Brands
+                    <NavLink to="/newarrivals" className={(navData) => (navData.isActive ? 'active' : '')}>
+                        New Arrivals
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/about" className={(navData) => (navData.isActive ? 'active' : '')}>
+                        About
                     </NavLink>
                 </li>
             </ul>
