@@ -22,7 +22,14 @@ const Brands: React.FC = () => {
                             <li key={uuidv4()}>
                                 <h3>{brand[0][0]}</h3>
                                 {brand[1].map((brandName) => (
-                                    <p key={uuidv4()}>{brandName}</p>
+                                    <>
+                                        <p key={uuidv4()}>{brandName}</p>
+                                        <img
+                                            src={`./images/${brandName.replace(/\s/g, '')}/logo.svg`}
+                                            alt=""
+                                            width="100px"
+                                        />
+                                    </>
                                 ))}
                             </li>
                         )
