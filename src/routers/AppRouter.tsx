@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import type React from 'react'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { About } from '../pages/About/About'
 import { Brand } from '../pages/Brand/Brand'
 import { Brands } from '../pages/Brands/Brands'
