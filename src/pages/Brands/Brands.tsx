@@ -24,7 +24,10 @@ const Brands: React.FC = () => {
                                 {brand[1].map((brandName) => (
                                     <Link key={uuidv4()} to={`/brands/${brandName}`}>
                                         <img
-                                            src={`./images/${brandName.replace(/\s/g, '')}/logo.svg`}
+                                            src={`${window.location.origin}/images/${brandName.replace(
+                                                /\s/g,
+                                                ''
+                                            )}/logo.svg`}
                                             alt=""
                                             width="100px"
                                         />
