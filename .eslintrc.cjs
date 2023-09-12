@@ -28,6 +28,6 @@ module.exports = {
     ignorePatterns: ['.eslintrc.cjs', 'vite.config.ts'],
     rules: {
         'eslint@typescript-eslint/strict-boolean-expressions': 'off',
-        'eslintreact/prop-types': 'off',
+        'react/prop-types': 'off',
     },
 }
