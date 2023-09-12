@@ -1,12 +1,29 @@
-// import { useParams } from 'react-router-dom'
-
-import { useAppSelector } from '../../reducers/redux/store'
+import { Link, useParams } from 'react-router-dom'
+import { findBrand } from '../../helpers/findBrand'
+import { type Watch } from '../../reducers/redux/watchInterface'
+import { v4 as uuidv4 } from 'uuid'
+import { WatchCard } from '../../components/WatchCard/WatchCard'
 
 const Brand: React.FC = () => {
-    const { watches } = useAppSelector((state) => state.watch)
+    let watches: Watch[] | null = null
+    const { brand } = useParams()
+    if (brand !== undefined) {
+        watches = findBrand(brand)
+    }
 
-    // const { brand } = useParams()
-
-    return <div>{watches === undefined ? <p>Loading...</p> : <p>{watches[0].name}</p>}</div>
+    return (
+        <div>
+            <ul>
+                {watches !== null && watches.length >= 1 ? (
+                    watches.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
+                ) : (
+                    <li>
+                        <h2>Brand not found</h2>
+                        <Link to={`/brands/`}>Return to Brands</Link>
+                    </li>
+                )}
+            </ul>
+        </div>
+    )
 }
 export { Brand }
