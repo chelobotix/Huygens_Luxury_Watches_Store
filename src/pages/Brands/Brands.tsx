@@ -22,14 +22,17 @@ const Brands: React.FC = () => {
                             <li key={uuidv4()}>
                                 <h3>{brand[0][0]}</h3>
                                 {brand[1].map((brandName) => (
-                                    <>
-                                        <p key={uuidv4()}>{brandName}</p>
+                                    <Link key={uuidv4()} to={`/brands/${brandName}`}>
                                         <img
-                                            src={`./images/${brandName.replace(/\s/g, '')}/logo.svg`}
+                                            src={`${window.location.origin}/images/${brandName.replace(
+                                                /\s/g,
+                                                ''
+                                            )}/logo.svg`}
                                             alt=""
                                             width="100px"
                                         />
-                                    </>
+                                        <p>{brandName}</p>
+                                    </Link>
                                 ))}
                             </li>
                         )
@@ -37,6 +40,7 @@ const Brands: React.FC = () => {
                     return null
                 })}
             </ul>
+            <Link to={`/brands/dsdasdasda`}>cualquier verga</Link>
         </div>
     )
 }

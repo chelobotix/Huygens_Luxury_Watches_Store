@@ -22,6 +22,7 @@ const fetchDataGet = createAsyncThunk('fetchWatchs', async (url: string) => {
         })
         .catch((error) => {
             console.log(error)
+            throw error
         })
     return await response
 })
@@ -37,20 +38,16 @@ const WatchSlice = createSlice({
         })
 
         builder.addCase(fetchDataGet.fulfilled, (state, action: PayloadAction<Watch[]>) => {
-            state.watches = action.payload
             state.isLoading = false
+            state.watches = action.payload
         })
 
         builder.addCase(fetchDataGet.rejected, (state, action) => {
-            console.log('Error', action.error.message)
-            state = {
-                ...state,
-                isLoading: true,
-                error: action.error.message,
-            }
+            state.isLoading = false
+            state.error = action.error.message
         })
     },
 })
 
-export { fetchDataGet }
+export { fetchDataGet, type WatchState }
 export default WatchSlice.reducer
