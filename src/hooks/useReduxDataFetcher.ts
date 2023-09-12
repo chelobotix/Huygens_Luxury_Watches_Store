@@ -5,10 +5,10 @@ import { useEffect } from 'react'
 const useReduxDataFetcher = (): WatchState => {
     const state = useAppSelector((state) => state.watch)
     const dispatch = useAppDispatch()
+    const db = window.location.origin + '/assets/db.json'
 
     useEffect(() => {
-        console.log('effect inside')
-        void dispatch(fetchDataGet('./db.json'))
+        void dispatch(fetchDataGet(db))
     }, [])
 
     return state
