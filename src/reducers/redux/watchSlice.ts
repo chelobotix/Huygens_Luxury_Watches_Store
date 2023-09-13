@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
-import { type Watch } from './watchInterface'
+import { type IWatches } from './WatchesInterface'
 
 interface WatchState {
-    watches: Watch[]
+    data: IWatches | null
     isLoading: boolean
     error: string | undefined
 }
 
 const initialState: WatchState = {
-    watches: [],
+    data: null,
     isLoading: true,
     error: undefined,
 }
@@ -37,9 +37,9 @@ const WatchSlice = createSlice({
             state.isLoading = true
         })
 
-        builder.addCase(fetchDataGet.fulfilled, (state, action: PayloadAction<Watch[]>) => {
+        builder.addCase(fetchDataGet.fulfilled, (state, action: PayloadAction<IWatches>) => {
             state.isLoading = false
-            state.watches = action.payload
+            state.data = action.payload
         })
 
         builder.addCase(fetchDataGet.rejected, (state, action) => {

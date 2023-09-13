@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { findBrand } from '../../helpers/findBrand'
-import { type Watch } from '../../reducers/redux/watchInterface'
+import { type Watch } from '../../reducers/redux/WatchesInterface'
 import { v4 as uuidv4 } from 'uuid'
 import { WatchCard } from '../../components/WatchCard/WatchCard'
 
