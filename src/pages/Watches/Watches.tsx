@@ -1,9 +1,8 @@
-interface SearchWatches {
-    terms: string[]
-}
+import { useParams } from 'react-router-dom'
 
-const Watches: React.FC<SearchWatches> = ({ terms }) => {
+const Watches: React.FC = () => {
+    const { terms } = useParams()
     console.log(terms)
-    return <div></div>
+    return <div>watches</div>
 }
 export { Watches }
