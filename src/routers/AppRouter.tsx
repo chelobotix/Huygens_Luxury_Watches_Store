@@ -20,8 +20,7 @@ const AppRouter: React.FC = () => {
                 <Route path="about" element={<About />} />
                 <Route path="brands" element={<Brands />} />
                 <Route path="newarrivals" element={<NewArrivals />} />
-                <Route path="watches/all" element={<Watches />} />
-                <Route path="watches/all/:terms" element={<Watches />} />
+                <Route path="watches" element={<Watches />} />
 
                 <Route path="error404" element={<Error404 />} />
                 <Route path="*" element={<Error404 />} />
