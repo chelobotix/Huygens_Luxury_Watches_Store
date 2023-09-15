@@ -18,32 +18,22 @@ const initialState: GlobalState = {
 
 /* ---------------------------------- Fetch --------------------------------- */
 // Fetch Watches Data
-const fetchWatchesGet = createAsyncThunk('fetchWatchesGet', async (url: string) => {
-    const response = fetch(url)
-        .then(async (res) => await res.json())
-        .then((data) => {
-            return data
-        })
-        .catch((error) => {
-            console.log(error)
-            throw error
-        })
-    return await response
-})
-
-// Fetch Brands Data
-const fetchDataGet = createAsyncThunk('fetchWatchs', async (url: string) => {
-    const response = fetch(url)
-        .then(async (res) => await res.json())
-        .then((data) => {
-            return data
-        })
-        .catch((error) => {
-            console.log(error)
-            throw error
-        })
-    return await response
-})
+const fetchWatchesGet = createAsyncThunk(
+    'fetchWatchesGet',
+    async (fetchProps: { url: string; target: string }) => {
+        const { url, target } = fetchProps
+        const response = fetch(url)
+            .then(async (res) => await res.json())
+            .then((data) => {
+                return data
+            })
+            .catch((error) => {
+                console.log(error)
+                throw error
+            })
+        return { response: await response, target }
+    }
+)
 
 /* ---------------------------------- Slice --------------------------------- */
 const WatchSlice = createSlice({
@@ -55,9 +45,19 @@ const WatchSlice = createSlice({
             state.isLoading = true
         })
 
-        builder.addCase(fetchWatchesGet.fulfilled, (state, action: PayloadAction<IWatches>) => {
+        builder.addCase(fetchWatchesGet.fulfilled, (state, action: PayloadAction<any>) => {
             state.isLoading = false
-            state.watchesData = action.payload
+            switch (action.payload.target) {
+                case 'watches':
+                    state.watchesData = action.payload.response
+                    break
+                case 'brands':
+                    state.brandsData = action.payload.response
+                    break
+                default:
+                    break
+            }
+            // state.watchesData = action.payload
         })
 
         builder.addCase(fetchWatchesGet.rejected, (state, action) => {
