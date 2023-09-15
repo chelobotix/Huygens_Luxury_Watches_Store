@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { numberWithCommas } from '../../helpers/numberWithComma'
 import { imgPath } from '../../helpers/imgPath'
-import { type IWatch } from '../../reducers/redux/WatchesInterface'
+import { type IWatch } from '../../reducers/redux/WatchInterface'
 
 const WatchCard: React.FC<{ watch: IWatch }> = ({ watch }) => {
     return (

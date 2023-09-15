@@ -1,30 +1,8 @@
-export interface IWatch {
-    id: number
-    name: string
-    brand: string
-    price: number
-    gender: string
-    video: string
-    reference?: string
-    collection?: string
-    caseSize?: string
-    caseMaterial?: string
-    movement?: string
-    caliber?: string
-    powerReserve?: string
-    dateAdded?: Date
-    dialColor?: string
-    dialMaterial?: string
-    caseBack?: string
-    strapMaterial?: string
-    strapColor?: string
-    buckleType?: string
-    specialFeature: string[]
-    thumbnails: string[]
-    images: string[]
-}
+import { type IWatch } from './WatchInterface'
 
-export interface IWatchesResponse {
+interface IWatches {
     status: string
     watches: IWatch[]
 }
+
+export { type IWatches }

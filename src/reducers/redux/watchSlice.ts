@@ -1,19 +1,37 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
 import { type IWatches } from './WatchesInterface'
+import { type IBrands } from './BrandsInterface'
 
-interface WatchState {
-    data: IWatches | null
+interface GlobalState {
+    watchesData: IWatches | null
+    brandsData: IBrands | null
     isLoading: boolean
     error: string | undefined
 }
 
-const initialState: WatchState = {
-    data: null,
+const initialState: GlobalState = {
+    watchesData: null,
+    brandsData: null,
     isLoading: true,
     error: undefined,
 }
 
 /* ---------------------------------- Fetch --------------------------------- */
+// Fetch Watches Data
+const fetchWatchesGet = createAsyncThunk('fetchWatchesGet', async (url: string) => {
+    const response = fetch(url)
+        .then(async (res) => await res.json())
+        .then((data) => {
+            return data
+        })
+        .catch((error) => {
+            console.log(error)
+            throw error
+        })
+    return await response
+})
+
+// Fetch Brands Data
 const fetchDataGet = createAsyncThunk('fetchWatchs', async (url: string) => {
     const response = fetch(url)
         .then(async (res) => await res.json())
@@ -33,21 +51,21 @@ const WatchSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchDataGet.pending, (state) => {
+        builder.addCase(fetchWatchesGet.pending, (state) => {
             state.isLoading = true
         })
 
-        builder.addCase(fetchDataGet.fulfilled, (state, action: PayloadAction<IWatches>) => {
+        builder.addCase(fetchWatchesGet.fulfilled, (state, action: PayloadAction<IWatches>) => {
             state.isLoading = false
-            state.data = action.payload
+            state.watchesData = action.payload
         })
 
-        builder.addCase(fetchDataGet.rejected, (state, action) => {
+        builder.addCase(fetchWatchesGet.rejected, (state, action) => {
             state.isLoading = false
             state.error = action.error.message
         })
     },
 })
 
-export { fetchDataGet, type WatchState }
+export { fetchWatchesGet, type GlobalState }
 export default WatchSlice.reducer
