@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom'
 import { BrandsbyAlphabet } from '../../helpers/brandsByAlphabet'
 import { v4 as uuidv4 } from 'uuid'
 import { removeWhiteSpace } from '../../helpers/removeWhiteSpace'
+import { encodeURI } from '../../helpers/encodeURI'
 
 const Brands: React.FC = () => {
     const brandsByAlphabet = BrandsbyAlphabet()
-    console.log(brandsByAlphabet)
 
     const alphabetAnchors = (): JSX.Element[] => {
         return Object.keys(brandsByAlphabet).map((letter) => (
@@ -24,9 +24,9 @@ const Brands: React.FC = () => {
                             <li key={uuidv4()}>
                                 <h2>{letter}</h2>
                                 <ul>
-                                    {brandsByAlphabet[letter].map((brand) => (
+                                    {brandsByAlphabet[letter].map((brand: string) => (
                                         <li key={uuidv4()}>
-                                            <Link to={`/watches?brand=${removeWhiteSpace(brand)}`}>
+                                            <Link to={`/watches?brand=${encodeURI(brand)}`}>
                                                 {brand}
                                             </Link>
                                         </li>
