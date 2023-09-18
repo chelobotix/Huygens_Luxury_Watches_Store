@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import { BrandsbyAlphabet } from '../../helpers/brandsByAlphabet'
 import { v4 as uuidv4 } from 'uuid'
-import { removeWhiteSpace } from '../../helpers/removeWhiteSpace'
+import { BrandsbyAlphabet } from '../../helpers/brandsByAlphabet'
 import { encodeURI } from '../../helpers/encodeURI'
 
 const Brands: React.FC = () => {
