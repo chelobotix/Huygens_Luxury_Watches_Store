@@ -1,21 +1,18 @@
-import { useLocation } from 'react-router-dom'
 import { SearchKeywordsBar } from '../../components/SearchKeywordsBar/SearchKeywordsBar'
+import { useSearchParams } from 'react-router-dom'
+import { readQuearyString } from '../../helpers/readQueryString'
 
-type Keywords = Record<string, string>
+type IKeywords = Record<string, string>
 
 const Watches: React.FC = () => {
-    const location = useLocation()
-    const searchKeywords = new URLSearchParams(location.search)
-    const keywords: Keywords[] = []
-    for (const [key, value] of searchKeywords.entries()) {
-        keywords.push({ [key]: value })
-    }
+    const [searchParams] = useSearchParams()
+    const keywords = readQuearyString(searchParams)
+    console.log(keywords)
 
     return (
         <div>
-            <SearchKeywordsBar keywords={keywords} />
-            watches
+            <SearchKeywordsBar keywordProps={keywords} />
         </div>
     )
 }
-export { Watches, type Keywords }
+export { Watches }

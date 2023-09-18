@@ -1,12 +1,13 @@
 import { type Keywords } from '../../pages/Watches/Watches'
 import { v4 as uuidv4 } from 'uuid'
+import { useState } from 'react'
 
 interface SearchKeywordsBarProps {
-    keywords: Keywords[]
+    keywordProps: Keywords[]
 }
 
-const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = ({ keywords }) => {
-    console.log(keywords)
+const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = ({ keywordProps }) => {
+    const [keywords, setkeyword] = useState(keywordProps)
     return (
         <div>
             <ul>
