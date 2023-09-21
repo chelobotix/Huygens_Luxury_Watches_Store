@@ -6,7 +6,6 @@ const readQuearyString = (searchParams: URLSearchParams): IKeywords => {
         const [param, value] = entry
         keywords[param] = value
     }
-
     return keywords
 }
 

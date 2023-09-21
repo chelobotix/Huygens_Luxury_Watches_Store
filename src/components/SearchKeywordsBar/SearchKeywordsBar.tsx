@@ -1,21 +1,41 @@
-import { type Keywords } from '../../pages/Watches/Watches'
 import { v4 as uuidv4 } from 'uuid'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface SearchKeywordsBarProps {
-    keywordProps: Keywords[]
+    brand?: string
+    genre?: string
 }
 
-const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = ({ keywordProps }) => {
-    const [keywords, setkeyword] = useState(keywordProps)
+const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = (props) => {
+    const [keywords, setkKeyword] = useState<SearchKeywordsBarProps>(props)
+    const navigate = useNavigate()
+    const firstRenderRef = useRef(true)
+
+    const handleClick = (key: keyof SearchKeywordsBarProps): void => {
+        const { [key]: propToDelete, ...rest } = keywords
+        setkKeyword(rest)
+    }
+
+    useEffect(() => {
+        if (firstRenderRef.current) {
+            firstRenderRef.current = false
+        } else {
+            navigate('/watches?genre=chizo&brand=jojo')
+        }
+    }, [keywords, navigate])
+
     return (
         <div>
             <ul>
-                {keywords.map((keyword) =>
-                    Object.keys(keyword).map((key) => (
-                        <li key={uuidv4()}>{`${key}: ${keyword[key]}`}</li>
-                    ))
-                )}
+                {Object.entries(keywords).map((keyword) => (
+                    <li
+                        onClick={() => {
+                            handleClick(keyword[0] as keyof SearchKeywordsBarProps)
+                        }}
+                        key={uuidv4()}
+                    >{`${keyword[0]}, ${keyword[1]}`}</li>
+                ))}
             </ul>
         </div>
     )

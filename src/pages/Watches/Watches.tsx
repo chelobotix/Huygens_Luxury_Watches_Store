@@ -2,16 +2,14 @@ import { SearchKeywordsBar } from '../../components/SearchKeywordsBar/SearchKeyw
 import { useSearchParams } from 'react-router-dom'
 import { readQuearyString } from '../../helpers/readQueryString'
 
-type IKeywords = Record<string, string>
-
 const Watches: React.FC = () => {
     const [searchParams] = useSearchParams()
     const keywords = readQuearyString(searchParams)
-    console.log(keywords)
+    console.log('render', keywords)
 
     return (
         <div>
-            <SearchKeywordsBar keywordProps={keywords} />
+            <SearchKeywordsBar {...keywords} />
         </div>
     )
 }
