@@ -22,16 +22,15 @@ const fetchWatchesGet = createAsyncThunk(
     'fetchWatchesGet',
     async (fetchProps: { url: string; target: string }) => {
         const { url, target } = fetchProps
-        const response = fetch(url)
-            .then(async (res) => await res.json())
-            .then((data) => {
-                return data
-            })
-            .catch((error) => {
-                console.log(error)
-                throw error
-            })
-        return { response: await response, target }
+        try {
+            const response = await fetch(url)
+            const json = await response.json()
+            const data = await json
+            return { response: await data, target }
+        } catch (error) {
+            console.log(error)
+            throw error
+        }
     }
 )
 

@@ -17,7 +17,6 @@ const readQuearyString = (searchParams: URLSearchParams): IKeywords => {
     for (const entry of searchParams.entries()) {
         const [param, value] = entry
         if (param in keywords) {
-            console.log(param)
             switch (param) {
                 case 'sortBy':
                     if (Object.keys(SortBy).includes(value as SortBy)) {
@@ -55,7 +54,6 @@ const readQuearyString = (searchParams: URLSearchParams): IKeywords => {
             }
         }
     }
-    console.log('query', keywords)
     return keywords
 }
 
