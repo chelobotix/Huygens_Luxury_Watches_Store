@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
-import { type IWatches } from './WatchesInterface'
-import { type IBrands } from './BrandsInterface'
+import { type IWatches } from '../../types/WatchesInterface'
+import { type IBrands } from '../../types/BrandsInterface'
 
 interface GlobalState {
     watchesData: IWatches | null

@@ -1,5 +1,5 @@
 import { useAppSelector } from '../reducers/redux/store'
-import { type Watch } from '../reducers/redux/WatchesInterface'
+import { type Watch } from '../types/WatchesInterface'
 
 const findBrand = (target: string): Watch[] => {
     const { watches } = useAppSelector((state) => state.watch)

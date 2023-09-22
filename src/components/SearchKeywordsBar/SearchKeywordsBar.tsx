@@ -1,18 +1,14 @@
 import { v4 as uuidv4 } from 'uuid'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { type IKeywords } from '../../types/KeywordInterface'
 
-interface SearchKeywordsBarProps {
-    brand?: string
-    genre?: string
-}
-
-const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = (props) => {
-    const [keywords, setkKeyword] = useState<SearchKeywordsBarProps>(props)
+const SearchKeywordsBar: React.FC<IKeywords> = (props) => {
+    const [keywords, setkKeyword] = useState<IKeywords>(props)
     const navigate = useNavigate()
     const firstRenderRef = useRef(true)
 
-    const handleClick = (key: keyof SearchKeywordsBarProps): void => {
+    const handleClick = (key: keyof IKeywords): void => {
         const { [key]: propToDelete, ...rest } = keywords
         setkKeyword(rest)
     }
@@ -31,7 +27,7 @@ const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = (props) => {
                 {Object.entries(keywords).map((keyword) => (
                     <li
                         onClick={() => {
-                            handleClick(keyword[0] as keyof SearchKeywordsBarProps)
+                            handleClick(keyword[0] as keyof IKeywords)
                         }}
                         key={uuidv4()}
                     >{`${keyword[0]}, ${keyword[1]}`}</li>
