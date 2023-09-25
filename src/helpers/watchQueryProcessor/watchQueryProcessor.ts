@@ -12,34 +12,39 @@ class WatchQueryProcessor {
         this.watchesData = state.watchesData
     }
 
-    sortByGender(filteredResults: IWatch[] | undefined, gender: string): IWatch[] | undefined {
-        filteredResults = this.watchesData?.watches.filter((watch) => watch.gender === gender)
-        if (Array.isArray(filteredResults) && filteredResults.length > 0) {
-            return filteredResults
-        }
-        return undefined
-    }
-
-    sortByBrand(filteredResults: IWatch[] | undefined, brand: string): IWatch[] | undefined {
-        filteredResults = this.watchesData?.watches.filter((watch) => watch.brand === brand)
-        if (Array.isArray(filteredResults) && filteredResults.length > 0) {
-            return filteredResults
-        }
-        return undefined
-    }
-
     sortBy(
         filteredResults: IWatch[] | undefined,
         keyword: keyof IWatch,
         searchCriteria: string
     ): IWatch[] | undefined {
-        filteredResults = this.watchesData?.watches.filter(
-            (watch) => watch[keyword] === searchCriteria
-        )
-        if (Array.isArray(filteredResults) && filteredResults.length > 0) {
-            return filteredResults
+        console.log(keyword)
+        if (filteredResults === undefined && this.watchesData?.watches !== undefined) {
+            filteredResults = this.#searchTarget(this.watchesData.watches, keyword, searchCriteria)
+        } else {
+            filteredResults = this.#searchTarget(filteredResults, keyword, searchCriteria)
         }
-        return undefined
+
+        console.log(filteredResults)
+        return filteredResults
+    }
+
+    #searchTarget = (
+        target: IWatch[] | undefined,
+        keyword: keyof IWatch,
+        searchCriteria: string
+    ): IWatch[] | undefined => {
+        const result = target?.filter((watch) => {
+            if (keyword === 'price' && typeof watch[keyword] === 'number') {
+                console.log(watch[keyword], parseInt(searchCriteria))
+                return watch[keyword] === parseInt(searchCriteria)
+            } else if (keyword === 'dateAdded') {
+                return watch[keyword]?.toString() === searchCriteria
+            } else if (typeof watch[keyword] === 'string') {
+                return (watch[keyword] as string).toLowerCase() === searchCriteria.toLowerCase()
+            }
+            return false
+        })
+        return result
     }
 }
 
