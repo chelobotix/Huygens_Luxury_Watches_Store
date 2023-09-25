@@ -28,7 +28,7 @@ const Brands: React.FC = () => {
                                             <Link
                                                 to={`/watches?brand=${encodeURI(
                                                     brand
-                                                )}&gender=male&price=1000`}
+                                                )}&dateAdded=dsad`}
                                             >
                                                 {brand}
                                             </Link>
