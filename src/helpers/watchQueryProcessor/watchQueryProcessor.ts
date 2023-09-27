@@ -2,6 +2,7 @@ import { type GlobalState } from '../../reducers/redux/watchSlice'
 import { type IBrands } from '../../types/BrandsInterface'
 import { type IWatch } from '../../types/WatchInterface'
 import { type IWatches } from '../../types/WatchesInterface'
+import { type ISearchModel } from '../isValidIWatchKey'
 
 class WatchQueryProcessor {
     brandsData: IBrands | null
@@ -14,7 +15,7 @@ class WatchQueryProcessor {
 
     sortBy(
         filteredResults: IWatch[] | undefined,
-        keyword: keyof IWatch,
+        keyword: keyof ISearchModel,
         searchCriteria: string
     ): IWatch[] | undefined {
         console.log(keyword)
@@ -28,21 +29,27 @@ class WatchQueryProcessor {
         return filteredResults
     }
 
+    getPriceRange = (
+        filteredResults: IWatch[] | undefined,
+        minPrice: number,
+        maxPrice: number
+    ): IWatch[] | undefined => {
+        const result = filteredResults?.filter(
+            (watch) => watch.price >= minPrice && watch.price <= maxPrice
+        )
+        return result
+    }
+
     #searchTarget = (
         target: IWatch[] | undefined,
-        keyword: keyof IWatch,
+        keyword: keyof ISearchModel,
         searchCriteria: string
     ): IWatch[] | undefined => {
         const result = target?.filter((watch) => {
-            if (keyword === 'price' && typeof watch[keyword] === 'number') {
-                console.log(watch[keyword], parseInt(searchCriteria))
-                return watch[keyword] === parseInt(searchCriteria)
-            } else if (keyword === 'dateAdded') {
-                return watch[keyword]?.toString() === searchCriteria
-            } else if (typeof watch[keyword] === 'string') {
-                return (watch[keyword] as string).toLowerCase() === searchCriteria.toLowerCase()
-            }
-            return false
+            return (
+                (watch[keyword as keyof IWatch] as string).toLowerCase() ===
+                searchCriteria.toLowerCase()
+            )
         })
         return result
     }

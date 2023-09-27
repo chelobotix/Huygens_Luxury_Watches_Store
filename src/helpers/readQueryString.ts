@@ -1,11 +1,14 @@
 import { isValidIWatchKey } from './isValidIWatchKey'
 
-const readQueryString = (searchParams: URLSearchParams): string[][] | undefined => {
-    const validParams: string[][] = []
+const readQueryString = (searchParams: URLSearchParams): Record<string, string> | undefined => {
+    let validParams: Record<string, string> | undefined
     for (const entry of searchParams.entries()) {
         const [param, value] = entry
         if (isValidIWatchKey(param)) {
-            validParams.push([param, value])
+            if (validParams === undefined) {
+                validParams = {}
+            }
+            validParams[param] = value
         }
     }
     if (validParams !== undefined) {
