@@ -7,7 +7,6 @@ const filterResult = (validParams: Record<string, string> | undefined): IWatch[]
     let result: IWatch[] | undefined
     const watchesQueryProcessor = new WatchQueryProcessor(useAppSelector((state) => state.watch))
     if (validParams !== undefined) {
-        console.log('valid params', validParams)
         Object.entries(validParams).forEach((param) => {
             if ((param[0] as keyof ISearchModel) !== 'minPrice' && (param[0] as keyof ISearchModel) !== 'maxPrice') {
                 result = watchesQueryProcessor.sortBy(result, param[0] as keyof ISearchModel, param[1])
