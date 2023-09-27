@@ -10,7 +10,10 @@ const keywordProcessor = (keyword: string, value: string, searchKeywords: Record
     } else if (keyword === 'brand') {
         return `Brand: ${value}`
     } else if (keyword === 'maxPrice') {
-        if (!('minPrice' in searchKeywords)) {
+        if (
+            !('minPrice' in searchKeywords) ||
+            ('minPrice' in searchKeywords && parseInt(searchKeywords.minPrice) < 100)
+        ) {
             return `Up to ${parseInt(value).toLocaleString()} USD`
         } else {
             return `${parseInt(searchKeywords.minPrice).toLocaleString()} USD - ${parseInt(value).toLocaleString()} USD`
