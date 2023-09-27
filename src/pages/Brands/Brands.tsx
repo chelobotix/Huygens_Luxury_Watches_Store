@@ -25,7 +25,7 @@ const Brands: React.FC = () => {
                                 <ul>
                                     {brandsByAlphabet[letter].map((brand: string) => (
                                         <li key={uuidv4()}>
-                                            <Link to={`/watches?brand=${encodeURI(brand)}&minPrice=55000&maxPrice=150000`}>{brand}</Link>
+                                            <Link to={`/watches?brand=${encodeURI(brand)}&gender=female`}>{brand}</Link>
                                         </li>
                                     ))}
                                 </ul>
