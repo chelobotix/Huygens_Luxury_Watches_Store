@@ -7,12 +7,9 @@ import { filterResult } from '../../helpers/filterResults'
 const Watches: React.FC = () => {
     const [searchParams] = useSearchParams()
     const validParams = readQueryString(searchParams)
+    console.log(validParams)
     const result = filterResult(validParams)
 
-    return (
-        <div>
-            <SearchKeywordsBar validParams={validParams} />
-        </div>
-    )
+    return <div>{validParams !== null && <SearchKeywordsBar validParams={validParams} />}</div>
 }
 export { Watches }

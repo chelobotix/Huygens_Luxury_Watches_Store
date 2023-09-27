@@ -1,16 +1,13 @@
 import { v4 as uuidv4 } from 'uuid'
-import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import _ from 'lodash'
 
 interface SearchKeywordsBarProps {
-    validParams: string[][] | undefined
+    validParams: Record<string, string>
 }
 
 const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = ({ validParams }) => {
-    const [keywords, setkKeyword] = useState<string[][] | undefined>(validParams)
-    const navigate = useNavigate()
-    const firstRenderRef = useRef(true)
+    const [searchKeywords, setSearchKeyword] = useState<Record<string, string>>(validParams)
 
     const keywordProcessor = (keyword: string, value: string): string => {
         if (keyword === 'gender') {
@@ -19,34 +16,28 @@ const SearchKeywordsBar: React.FC<SearchKeywordsBarProps> = ({ validParams }) =>
             } else {
                 return "Women's"
             }
+        } else if (keyword === 'maxPrice') {
+            if (!('minPrice' in searchKeywords)) {
+                return `Up to ${parseInt(value).toLocaleString()} USD`
+            } else {
+                return `${parseInt(searchKeywords.minPrice).toLocaleString()} USD - ${parseInt(value).toLocaleString()} USD`
+            }
         }
+
         return _.capitalize(keyword)
     }
-
-    //const handleClick = (key: keyof IKeywords): void => {
-    // const { [key]: propToDelete, ...rest } = keywords
-    // setkKeyword(rest)
-    //}
-
-    useEffect(() => {
-        if (firstRenderRef.current) {
-            firstRenderRef.current = false
-        } else {
-            navigate('/watches?genre=chizo&brand=jojo')
-        }
-    }, [keywords, navigate])
 
     return (
         <div>
             <ul>
-                {keywords?.map((keyword) => (
+                {Object.entries(searchKeywords).map((searchKeyword) => (
                     <li
                         onClick={() => {
                             // handleClick(keyword[0] as keyof IKeywords)
                         }}
                         key={uuidv4()}
                     >
-                        {keywordProcessor(keyword[0], keyword[1])}
+                        {keywordProcessor(searchKeyword[0], searchKeyword[1])}
                     </li>
                 ))}
             </ul>
