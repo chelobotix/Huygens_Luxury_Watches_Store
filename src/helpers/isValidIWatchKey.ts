@@ -4,9 +4,6 @@ interface ISearchModel {
     minPrice: number | undefined
     maxPrice: number | undefined
     gender: string | undefined
-    reference: string | undefined
-    collection: string | undefined
-    caseSize: string | undefined
     caseMaterial: string | undefined
     movement: string | undefined
     caliber: string | undefined
@@ -16,7 +13,6 @@ interface ISearchModel {
     caseBack: string | undefined
     strapMaterial: string | undefined
     strapColor: string | undefined
-    buckleType: string | undefined
 }
 
 const SearchModel: ISearchModel = {
@@ -25,9 +21,6 @@ const SearchModel: ISearchModel = {
     minPrice: undefined,
     maxPrice: undefined,
     gender: undefined,
-    reference: undefined,
-    collection: undefined,
-    caseSize: undefined,
     caseMaterial: undefined,
     movement: undefined,
     caliber: undefined,
@@ -37,7 +30,6 @@ const SearchModel: ISearchModel = {
     caseBack: undefined,
     strapMaterial: undefined,
     strapColor: undefined,
-    buckleType: undefined,
 }
 
 function isValidIWatchKey(key: string): boolean {

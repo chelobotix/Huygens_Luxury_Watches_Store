@@ -28,7 +28,6 @@ const keywordProcessor = (keyword: string, value: string, searchKeywords: Record
         keyword === 'dialMaterial' ||
         keyword === 'strapColor' ||
         keyword === 'strapMaterial' ||
-        keyword === 'buckleType' ||
         keyword === 'caseBack'
     ) {
         return _.startCase(keyword)

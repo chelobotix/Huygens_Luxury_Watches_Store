@@ -1,7 +1,7 @@
-import { type IWatch } from '../types/WatchInterface'
-import { useAppSelector } from '../reducers/redux/store'
-import { WatchQueryProcessor } from './watchQueryProcessor/watchQueryProcessor'
-import { type ISearchModel } from './isValidIWatchKey'
+import { type IWatch } from '../../types/WatchInterface'
+import { useAppSelector } from '../../reducers/redux/store'
+import { WatchQueryProcessor } from '../../helpers/watchQueryProcessor/watchQueryProcessor'
+import { type ISearchModel } from '../../helpers/isValidIWatchKey'
 
 const filterResult = (validParams: Record<string, string> | undefined): IWatch[] | undefined => {
     let result: IWatch[] | undefined
@@ -14,7 +14,11 @@ const filterResult = (validParams: Record<string, string> | undefined): IWatch[]
         })
         if ('maxPrice' in validParams) {
             if ('minPrice' in validParams && parseInt(validParams.minPrice) > 100) {
-                result = watchesQueryProcessor.getPriceRange(result, parseInt(validParams.minPrice), parseInt(validParams.maxPrice))
+                result = watchesQueryProcessor.getPriceRange(
+                    result,
+                    parseInt(validParams.minPrice),
+                    parseInt(validParams.maxPrice)
+                )
             } else {
                 result = watchesQueryProcessor.getPriceRange(result, 100, parseInt(validParams.maxPrice))
             }
