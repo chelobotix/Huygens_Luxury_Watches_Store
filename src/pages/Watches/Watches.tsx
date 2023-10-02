@@ -9,10 +9,11 @@ import { v4 as uuidv4 } from 'uuid'
 const Watches: React.FC = () => {
     const [searchParams] = useSearchParams()
     const validParams = readQueryString(searchParams)
+    console.log('valid', validParams)
     const result = filterResult(validParams)
     return (
         <div>
-            <SearchBar />
+            <SearchBar validParams={validParams} />
             {validParams !== null && <SearchKeywordsBar validParams={validParams as Record<string, string>} />}
             {result !== undefined && result.length > 0 ? (
                 result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)

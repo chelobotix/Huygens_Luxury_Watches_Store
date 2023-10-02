@@ -1,3 +1,4 @@
+import { isKey } from '../../helpers/isKey'
 import { useAppSelector } from '../../reducers/redux/store'
 import _ from 'lodash'
 
@@ -57,8 +58,8 @@ const selectOptionProcessor = (): IOptions => {
     })
 
     Object.entries(options).forEach(([key, value]) => {
-        if (Array.isArray(value)) {
-            options[key as keyof IOptions] = _.unionBy(value, 'value')
+        if (Array.isArray(value) && isKey(options, key)) {
+            options[key] = _.unionBy(value, 'value')
         }
     })
 

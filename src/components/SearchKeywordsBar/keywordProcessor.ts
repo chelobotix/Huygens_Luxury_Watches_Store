@@ -18,6 +18,8 @@ const keywordProcessor = (keyword: string, value: string, searchKeywords: Record
         } else {
             return `${parseInt(searchKeywords.minPrice).toLocaleString()} USD - ${parseInt(value).toLocaleString()} USD`
         }
+    } else if ('minPrice' in searchKeywords && !('maxPrice' in searchKeywords)) {
+        return `Up to ${parseInt(value).toLocaleString()} USD`
     } else if (keyword === 'minPrice') {
         return null
     } else if (
