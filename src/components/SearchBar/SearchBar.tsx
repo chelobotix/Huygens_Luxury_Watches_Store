@@ -11,23 +11,22 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ validParams }) => {
     const options = selectOptionProcessor()
 
-    const handleSingleSelection = (event: SingleValue<{ value: string; label: string }>, label: string): void => {
-        if (label === 'brand' && event?.value !== undefined) {
-            window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
-        } else if (label === 'gender' && event?.value !== undefined) {
-            window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
+    const handleSelection = (event: SingleValue<{ value: string; label: string }>, label: string): void => {
+        if (event?.value !== undefined) {
+            if (label === 'brand') {
+                window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
+            } else if (label === 'gender') {
+                window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
+            } else {
+                console.log(event)
+            }
         }
     }
 
     return (
         <div>
             {Object.entries(options).map(([key, value]) => (
-                <SelectOptionInput
-                    key={uuidv4()}
-                    options={value}
-                    label={key}
-                    handleSingleSelection={handleSingleSelection}
-                />
+                <SelectOptionInput key={uuidv4()} options={value} label={key} handleSelection={handleSelection} />
             ))}
         </div>
     )
