@@ -1,41 +1,21 @@
 import _ from 'lodash'
 import { useState } from 'react'
-import Select, { components, type MultiValue, type SingleValue } from 'react-select'
+import Select, { type MultiValue, type SingleValue } from 'react-select'
+import { SelectOptionButtons } from './SelectOptionButton'
 
 interface SelectOptionInputProps {
     options: Array<{ value: string; label: string }>
     label: string
-    handleSelection: (event: SingleValue<{ value: string; label: string }>, label: string) => void
-}
-
-const handleClick = (selection: MultiValue<{ value: string; label: string }>): void => {
-    console.log(selection)
-}
-
-const SelectOptionButtons = (props: any, selection: MultiValue<{ value: string; label: string }>): JSX.Element => {
-    return (
-        <components.MenuList {...props}>
-            <div>
-                <div>{props.children}</div>
-                <div>
-                    <button>Clear</button>
-                    <button
-                        onClick={() => {
-                            handleClick(selection)
-                        }}
-                    >
-                        Save
-                    </button>
-                </div>
-            </div>
-        </components.MenuList>
-    )
+    handleSelection: (
+        event: SingleValue<{ value: string; label: string }> | MultiValue<{ value: string; label: string }>,
+        label: string
+    ) => void
 }
 
 const SelectOptionInput: React.FC<SelectOptionInputProps> = ({ options, label, handleSelection }) => {
     const [selection, setSelection] = useState<MultiValue<{ value: string; label: string }>>([])
-    // function to check if render a single select or multi option select
 
+    // function to check if render a single select or multi option select
     const selectMode = (): JSX.Element => {
         if (label !== 'price') {
             // single options
@@ -58,7 +38,7 @@ const SelectOptionInput: React.FC<SelectOptionInputProps> = ({ options, label, h
                             options={options}
                             isMulti
                             components={{
-                                MenuList: (props) => SelectOptionButtons(props, selection),
+                                MenuList: (props) => SelectOptionButtons(props, selection, handleSelection, label),
                             }}
                             placeholder={_.startCase(label)}
                             onChange={(event) => {
@@ -71,6 +51,7 @@ const SelectOptionInput: React.FC<SelectOptionInputProps> = ({ options, label, h
         }
         return <></>
     }
+
     return <div>{selectMode()}</div>
 }
 

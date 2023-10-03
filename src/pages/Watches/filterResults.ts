@@ -6,6 +6,7 @@ import { type ISearchModel } from '../../helpers/isValidIWatchKey'
 const filterResult = (validParams: Record<string, string> | undefined): IWatch[] | undefined => {
     let result: IWatch[] | undefined
     const watchesQueryProcessor = new WatchQueryProcessor(useAppSelector((state) => state.watch))
+
     if (validParams !== undefined) {
         Object.entries(validParams).forEach((param) => {
             if ((param[0] as keyof ISearchModel) !== 'minPrice' && (param[0] as keyof ISearchModel) !== 'maxPrice') {

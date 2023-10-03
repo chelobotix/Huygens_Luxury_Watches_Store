@@ -1,4 +1,4 @@
-import { type SingleValue } from 'react-select'
+import { type MultiValue, type SingleValue } from 'react-select'
 import { SelectOptionInput } from '../SelectOptionInput/SelectOptionInput'
 import { selectOptionProcessor } from './selectOptionProcessor'
 import { v4 as uuidv4 } from 'uuid'
@@ -11,14 +11,24 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ validParams }) => {
     const options = selectOptionProcessor()
 
-    const handleSelection = (event: SingleValue<{ value: string; label: string }>, label: string): void => {
-        if (event?.value !== undefined) {
-            if (label === 'brand') {
-                window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
-            } else if (label === 'gender') {
-                window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
+    const handleSelection = (
+        event: SingleValue<{ value: string; label: string }> | MultiValue<{ value: string; label: string }>,
+        label: string
+    ): void => {
+        if (event !== null && typeof event !== 'undefined') {
+            // Check if Selection is Multiple or Single
+            if (Array.isArray(event)) {
+                console.log('dasd')
             } else {
-                console.log(event)
+                if ('value' in event) {
+                    if (label === 'brand') {
+                        window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
+                    } else if (label === 'gender') {
+                        window.open(isKeywordDuplicate(window.location.href, label, event.value), '_self')
+                    } else if (label === 'price') {
+                        console.log('otroooo')
+                    }
+                }
             }
         }
     }

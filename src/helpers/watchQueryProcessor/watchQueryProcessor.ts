@@ -18,14 +18,16 @@ class WatchQueryProcessor {
         keyword: keyof ISearchModel,
         searchCriteria: string
     ): IWatch[] | undefined {
-        console.log(keyword)
+        console.log('Query processor, sort by', searchCriteria)
+        const searchCriteriaSplited = this.#isComposed(searchCriteria)
+
         if (filteredResults === undefined && this.watchesData?.watches !== undefined) {
-            filteredResults = this.#searchTarget(this.watchesData.watches, keyword, searchCriteria)
+            filteredResults = this.#searchTarget(this.watchesData.watches, keyword, searchCriteriaSplited)
         } else {
-            filteredResults = this.#searchTarget(filteredResults, keyword, searchCriteria)
+            filteredResults = this.#searchTarget(filteredResults, keyword, searchCriteriaSplited)
         }
 
-        console.log(filteredResults)
+        console.log('filteredResutl', filteredResults)
         return filteredResults
     }
 
@@ -34,23 +36,32 @@ class WatchQueryProcessor {
         minPrice: number,
         maxPrice: number
     ): IWatch[] | undefined => {
-        const result = filteredResults?.filter(
-            (watch) => watch.price >= minPrice && watch.price <= maxPrice
-        )
+        const result = filteredResults?.filter((watch) => watch.price >= minPrice && watch.price <= maxPrice)
         return result
+    }
+
+    #isComposed(searchCriteria: string): string | string[] {
+        if (searchCriteria.includes(',')) {
+            return searchCriteria.split(',')
+        }
+        return searchCriteria
     }
 
     #searchTarget = (
         target: IWatch[] | undefined,
         keyword: keyof ISearchModel,
-        searchCriteria: string
+        searchCriteria: string | string[]
     ): IWatch[] | undefined => {
-        const result = target?.filter((watch) => {
-            return (
-                (watch[keyword as keyof IWatch] as string).toLowerCase() ===
-                searchCriteria.toLowerCase()
-            )
-        })
+        let result
+        if (typeof searchCriteria === 'string') {
+            result = target?.filter((watch) => {
+                return (watch[keyword as keyof IWatch] as string).toLowerCase() === searchCriteria.toLowerCase()
+            })
+        } else {
+            result = target?.filter((watch) => {
+                return searchCriteria.includes(watch[keyword as keyof IWatch] as string)
+            })
+        }
         return result
     }
 }
