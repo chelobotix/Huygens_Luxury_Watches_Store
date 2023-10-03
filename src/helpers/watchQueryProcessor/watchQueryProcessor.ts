@@ -3,6 +3,7 @@ import { type IBrands } from '../../types/BrandsInterface'
 import { type IWatch } from '../../types/WatchInterface'
 import { type IWatches } from '../../types/WatchesInterface'
 import { type ISearchModel } from '../isValidIWatchKey'
+import _ from 'lodash'
 
 class WatchQueryProcessor {
     brandsData: IBrands | null
@@ -40,9 +41,12 @@ class WatchQueryProcessor {
         return result
     }
 
+    // #Private
+
+    // Check if param is single or composed with multiple values
     #isComposed(searchCriteria: string): string | string[] {
         if (searchCriteria.includes(',')) {
-            return searchCriteria.split(',')
+            return searchCriteria.split(',').map((item) => _.lowerCase(item))
         }
         return searchCriteria
     }
@@ -55,11 +59,11 @@ class WatchQueryProcessor {
         let result
         if (typeof searchCriteria === 'string') {
             result = target?.filter((watch) => {
-                return (watch[keyword as keyof IWatch] as string).toLowerCase() === searchCriteria.toLowerCase()
+                return _.lowerCase(watch[keyword as keyof IWatch] as string) === _.lowerCase(searchCriteria)
             })
         } else {
             result = target?.filter((watch) => {
-                return searchCriteria.includes(watch[keyword as keyof IWatch] as string)
+                return searchCriteria.includes(_.lowerCase(watch[keyword as keyof IWatch] as string))
             })
         }
         return result
