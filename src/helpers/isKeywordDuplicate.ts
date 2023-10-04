@@ -7,7 +7,6 @@ const isKeywordDuplicate = (currentURL: string, keyword: string, newValue: strin
     } else {
         searchParams.append(keyword, newValue)
     }
-
     return `/watches?${searchParams.toString()}`
 }
 

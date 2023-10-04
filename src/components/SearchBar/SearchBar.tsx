@@ -18,7 +18,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ validParams }) => {
         if (event !== null && typeof event !== 'undefined') {
             // Check if Selection is Multiple or Single
             if (Array.isArray(event)) {
-                console.log('dasd')
+                let joinValue = ''
+                event.forEach((item, index) => {
+                    if ('value' in item) {
+                        if (index < event.length - 1) {
+                            joinValue += `${item.value},`
+                        } else {
+                            joinValue += item.value
+                        }
+                    }
+                })
+                window.open(isKeywordDuplicate(window.location.href, label, joinValue), '_self')
             } else {
                 if ('value' in event) {
                     if (label === 'brand') {
