@@ -25,7 +25,6 @@ const StyledContainer = styled.div<StyledContainerProps>`
         }
 
         ul {
-            display: ${(props) => (props.isVisible ? 'flex' : 'none')};
             flex-direction: column;
             list-style-type: none;
             padding: 0;
@@ -50,6 +49,14 @@ const StyledContainer = styled.div<StyledContainerProps>`
 
     .selected {
         font-weight: bold;
+    }
+
+    .visible {
+        display: flex;
+    }
+
+    .invisible {
+        display: none;
     }
 `
 

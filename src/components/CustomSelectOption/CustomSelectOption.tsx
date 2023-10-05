@@ -1,6 +1,7 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { ClickAwayListener } from '@mui/base/ClickAwayListener'
+import { useClickAway } from '@uidotdev/usehooks'
+import Fade from '@mui/material/Fade'
 import { Badge, Button } from '@mui/material'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -23,6 +24,10 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
         setIsOpen((prev) => !prev)
     }
 
+    const ref: any = useClickAway(() => {
+        setIsOpen(false)
+    })
+
     const handleClickItem = (item: { value: string; label: string }): void => {
         if (isMulti) {
             if (selectedItems.includes(item.label)) {
@@ -35,7 +40,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                 setBadgeCounter(badgeCounter + 1)
             }
         } else {
-            //console.log(item)
+            // console.log(item)
         }
     }
 
@@ -52,25 +57,28 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                         {_.startCase(title)}
                     </Button>
                 </Badge>
-                <ul>
-                    {items.map((item) => (
-                        <li
-                            onClick={() => {
-                                handleClickItem(item)
-                            }}
-                            key={uuidv4()}
-                            className={selectedItems.includes(item.label) ? 'selected' : ''}
-                        >
-                            {item.label}
-                        </li>
-                    ))}
-                    {isMulti && (
-                        <div>
-                            <Button variant="contained">Clear</Button>
-                            <Button variant="contained">Save</Button>
-                        </div>
-                    )}
-                </ul>
+
+                <Fade in={isOpen}>
+                    <ul ref={ref} className={isOpen ? 'visible' : 'invisible'}>
+                        {items.map((item) => (
+                            <li
+                                onClick={() => {
+                                    handleClickItem(item)
+                                }}
+                                key={uuidv4()}
+                                className={selectedItems.includes(item.label) ? 'selected' : ''}
+                            >
+                                {item.label}
+                            </li>
+                        ))}
+                        {isMulti && (
+                            <div>
+                                <Button variant="contained">Clear</Button>
+                                <Button variant="contained">Save</Button>
+                            </div>
+                        )}
+                    </ul>
+                </Fade>
             </div>
         </StyledContainer>
     )
