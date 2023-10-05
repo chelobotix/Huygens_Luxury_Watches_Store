@@ -3,6 +3,7 @@ import { SelectOptionInput } from '../SelectOptionInput/SelectOptionInput'
 import { selectOptionProcessor } from './selectOptionProcessor'
 import { v4 as uuidv4 } from 'uuid'
 import { isKeywordDuplicate } from '../../helpers/isKeywordDuplicate'
+import { CustomSelectOption } from '../CustomSelectOption/CustomSelectOption'
 
 interface SearchBarProps {
     validParams: Record<string, string> | undefined
@@ -45,9 +46,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ validParams }) => {
 
     return (
         <div>
-            {Object.entries(options).map(([key, value]) => (
-                <SelectOptionInput key={uuidv4()} options={value} label={key} handleSelection={handleSelection} />
-            ))}
+            {Object.entries(options).map(([key, value]) => {
+                console.log(key, value)
+                if (key === 'price') {
+                    return false
+                } else {
+                    if (key === 'gender' || key === 'brand') {
+                        return <CustomSelectOption key={uuidv4()} title={key} items={value} isMulti={false} />
+                    } else {
+                        return <CustomSelectOption key={uuidv4()} title={key} items={value} isMulti={true} />
+                    }
+                }
+            })}
         </div>
     )
 }
