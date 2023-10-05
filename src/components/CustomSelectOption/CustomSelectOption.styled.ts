@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 
-interface StyledContainerProps {
-    isVisible: boolean
-    isMulti: boolean
-}
-
-const StyledContainer = styled.div<StyledContainerProps>`
+const StyledContainer = styled.div`
     background-color: aquamarine;
     border: solid 1px black;
     width: auto;

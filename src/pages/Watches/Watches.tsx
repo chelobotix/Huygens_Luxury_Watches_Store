@@ -9,7 +9,6 @@ import { v4 as uuidv4 } from 'uuid'
 const Watches: React.FC = () => {
     const [searchParams] = useSearchParams()
     const validParams = readQueryString(searchParams)
-    console.log('valid', validParams)
     const result = filterResult(validParams)
     return (
         <div>

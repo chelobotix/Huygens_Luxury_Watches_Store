@@ -10,12 +10,12 @@ import _ from 'lodash'
 
 interface CustomSelectOptionProps {
     title: string
-    items: Array<{ value: string; label: string }>
+    items: string[]
     isMulti: boolean
+    handleSelection: (title: string, item: string) => void
 }
-const multiItems: { title: string; items: Array<{ value: string; label: string }> } = { title: '', items: [] }
 
-const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti }) => {
+const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti, handleSelection }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string[]>([])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
@@ -28,24 +28,24 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
         setIsOpen(false)
     })
 
-    const handleClickItem = (item: { value: string; label: string }): void => {
+    const handleClickItem = (item: string): void => {
         if (isMulti) {
-            if (selectedItems.includes(item.label)) {
-                setSelectedItems((prev) => prev.filter((x) => x !== item.label))
-                multiItems.items = multiItems.items.filter((x) => x.label !== item.label)
+            if (selectedItems.includes(item)) {
+                setSelectedItems((prev) => prev.filter((x) => x !== item))
+                // multiItems.items = multiItems.items.filter((x) => x.label !== item.label)
                 setBadgeCounter(badgeCounter - 1)
             } else {
-                setSelectedItems((prev) => [...prev, item.label])
-                multiItems.items.push(item)
+                setSelectedItems((prev) => [...prev, item])
+                // multiItems.items.push(item)
                 setBadgeCounter(badgeCounter + 1)
             }
         } else {
-            // console.log(item)
+            handleSelection(title, item)
         }
     }
 
     return (
-        <StyledContainer isVisible={isOpen} isMulti={isMulti}>
+        <StyledContainer>
             <div className="divAbsolute">
                 <Badge badgeContent={badgeCounter} color="primary">
                     <Button
@@ -66,9 +66,9 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                     handleClickItem(item)
                                 }}
                                 key={uuidv4()}
-                                className={selectedItems.includes(item.label) ? 'selected' : ''}
+                                className={selectedItems.includes(item) ? 'selected' : ''}
                             >
-                                {item.label}
+                                {item}
                             </li>
                         ))}
                         {isMulti && (
