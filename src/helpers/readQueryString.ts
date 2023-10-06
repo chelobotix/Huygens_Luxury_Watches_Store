@@ -1,20 +1,14 @@
 import { isValidKeyword } from './isValidKeyword'
+import { includeInSearch } from '../reducers/redux/searchSlice'
+import { type ISearch } from '../types/SearchInterface'
 
-const readQueryString = (searchParams: URLSearchParams): Record<string, string> | undefined => {
-    let validParams: Record<string, string> | undefined
+const readQueryString = (searchParams: URLSearchParams, search: ISearch, dispatch: any): void => {
     for (const entry of searchParams.entries()) {
         const [param, value] = entry
-        if (isValidKeyword(param)) {
-            if (validParams === undefined) {
-                validParams = {}
-            }
-            validParams[param] = value
+        if (isValidKeyword(param, search)) {
+            dispatch(includeInSearch({ key: param as keyof ISearch, value }))
         }
     }
-    if (validParams !== undefined) {
-        return validParams
-    }
-    return undefined
 }
 
 export { readQueryString }

@@ -1,8 +1,6 @@
 import { type ISearch } from '../types/SearchInterface'
-import { useAppSelector } from '../reducers/redux/store'
 
-function isValidKeyword(key: string): boolean {
-    const search = useAppSelector((state) => state.search)
+function isValidKeyword(key: string, search: ISearch): boolean {
     if (key in search) {
         return true
     }

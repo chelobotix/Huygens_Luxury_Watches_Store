@@ -8,21 +8,23 @@ import { v4 as uuidv4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { includeInSearch } from '../../reducers/redux/searchSlice'
 import { useEffect } from 'react'
+import { watch } from 'fs'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
+    const { watchesData } = useAppSelector((state) => state.watch)
     const dispatch = useAppDispatch()
+    const [searchParams] = useSearchParams()
 
     useEffect(() => {
-        dispatch(includeInSearch({ key: 'gender', value: 'Male' }))
-        dispatch(includeInSearch({ key: 'gender', value: 'Female' }))
-        console.log('search', search)
-    }, [])
+        // readQueryString(searchParams, search, dispatch)
+        dispatch(includeInSearch({ key: 'brand', value: 'pigget' }))
+    }, [dispatch])
 
-    const [searchParams] = useSearchParams()
-    const validParams = readQueryString(searchParams)
-    console.log('wv', validParams)
-    const result = filterResult(validParams)
+    useEffect(() => {
+        console.log(search)
+    }, [search])
+
     return (
         <div>
             {/* <SearchBar validParams={validParams} />
