@@ -1,17 +1,38 @@
 import { type ISearch } from '../../types/SearchInterface'
 import { type IWatch } from '../../types/WatchInterface'
+import _ from 'lodash'
 
 const filterResult = (search: ISearch, watches: IWatch[] | undefined): IWatch[] | undefined => {
     let result: IWatch[] | undefined
-    const params: Array<{ key: string; value: string }> = []
-
+    console.log(search)
     Object.entries(search).forEach((item) => {
         const [key, value] = item
-        if (value.length > 0) {
-            params.push({ key, value: value.toString() })
+        if (value !== null) {
+            if (value.includes(',') === true) {
+                const target = value.split(',').map((item: string) => _.camelCase(item))
+
+                if (result === undefined) {
+                    result = watches?.filter((watch) =>
+                        target.includes(_.camelCase(watch[key as keyof IWatch] as string))
+                    )
+                } else {
+                    result = result.filter((watch) =>
+                        target.includes(_.camelCase(watch[key as keyof IWatch] as string))
+                    )
+                }
+            } else {
+                if (result === undefined) {
+                    result = watches?.filter(
+                        (watch) => _.camelCase(watch[key as keyof IWatch] as string) === _.camelCase(value)
+                    )
+                } else {
+                    result = result.filter(
+                        (watch) => _.camelCase(watch[key as keyof IWatch] as string) === _.camelCase(value)
+                    )
+                }
+            }
         }
     })
-    console.log('params', params)
 
     return result
 }
