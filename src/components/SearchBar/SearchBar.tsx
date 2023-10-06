@@ -1,10 +1,8 @@
-import { type MultiValue, type SingleValue } from 'react-select'
-import { SelectOptionInput } from '../SelectOptionInput/SelectOptionInput'
-import { selectOptionProcessor } from './selectOptionProcessor'
+import _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 import { isKeywordDuplicate } from '../../helpers/isKeywordDuplicate'
 import { CustomSelectOption } from '../CustomSelectOption/CustomSelectOption'
-import _ from 'lodash'
+import { selectOptionProcessor } from './selectOptionProcessor'
 
 interface SearchBarProps {
     validParams: Record<string, string> | undefined
@@ -20,6 +18,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ validParams }) => {
 
     const handleSelection = (title: string, item: string): void => {
         if (_.lowerCase(title) === 'brand' || _.lowerCase(title) === 'gender') {
+            window.open(isKeywordDuplicate(window.location.href, title, item), '_self')
+        } else if (_.lowerCase(title) === 'price') {
+            console.log('price')
+        } else {
             window.open(isKeywordDuplicate(window.location.href, title, item), '_self')
         }
     }

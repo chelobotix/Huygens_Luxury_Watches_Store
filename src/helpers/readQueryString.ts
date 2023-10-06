@@ -1,10 +1,10 @@
-import { isValidIWatchKey } from './isValidIWatchKey'
+import { isValidKeyword } from './isValidKeyword'
 
 const readQueryString = (searchParams: URLSearchParams): Record<string, string> | undefined => {
     let validParams: Record<string, string> | undefined
     for (const entry of searchParams.entries()) {
         const [param, value] = entry
-        if (isValidIWatchKey(param)) {
+        if (isValidKeyword(param)) {
             if (validParams === undefined) {
                 validParams = {}
             }

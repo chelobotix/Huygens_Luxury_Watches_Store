@@ -1,12 +1,12 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { useClickAway } from '@uidotdev/usehooks'
-import Fade from '@mui/material/Fade'
 import { Badge, Button } from '@mui/material'
+import Fade from '@mui/material/Fade'
+import { useClickAway } from '@uidotdev/usehooks'
+import _ from 'lodash'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { StyledContainer } from './CustomSelectOption.styled'
-import _ from 'lodash'
 
 interface CustomSelectOptionProps {
     title: string
@@ -19,6 +19,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string[]>([])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
+    console.log(selectedItems)
 
     const handleClickButton = (): void => {
         setIsOpen((prev) => !prev)
@@ -32,11 +33,9 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
         if (isMulti) {
             if (selectedItems.includes(item)) {
                 setSelectedItems((prev) => prev.filter((x) => x !== item))
-                // multiItems.items = multiItems.items.filter((x) => x.label !== item.label)
                 setBadgeCounter(badgeCounter - 1)
             } else {
-                setSelectedItems((prev) => [...prev, item])
-                // multiItems.items.push(item)
+                setSelectedItems((prev) => [...prev, _.camelCase(item)])
                 setBadgeCounter(badgeCounter + 1)
             }
         } else {
@@ -66,15 +65,30 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                     handleClickItem(item)
                                 }}
                                 key={uuidv4()}
-                                className={selectedItems.includes(item) ? 'selected' : ''}
+                                className={selectedItems.includes(_.camelCase(item)) ? 'selected' : ''}
                             >
                                 {item}
                             </li>
                         ))}
                         {isMulti && (
                             <div>
-                                <Button variant="contained">Clear</Button>
-                                <Button variant="contained">Save</Button>
+                                <Button
+                                    onClick={() => {
+                                        setSelectedItems([])
+                                    }}
+                                    variant="contained"
+                                >
+                                    Clear
+                                </Button>
+                                <Button
+                                    onClick={() => {
+                                        handleSelection(title, selectedItems.toString())
+                                    }}
+                                    variant="contained"
+                                    disabled={selectedItems.length === 0}
+                                >
+                                    Save
+                                </Button>
                             </div>
                         )}
                     </ul>

@@ -1,7 +1,7 @@
 import { type IWatch } from '../../types/WatchInterface'
 import { useAppSelector } from '../../reducers/redux/store'
 import { WatchQueryProcessor } from '../../helpers/watchQueryProcessor/watchQueryProcessor'
-import { type ISearchModel } from '../../helpers/isValidIWatchKey'
+import { type ISearchModel } from '../../helpers/isValidKeyword'
 
 const filterResult = (validParams: Record<string, string> | undefined): IWatch[] | undefined => {
     let result: IWatch[] | undefined

@@ -2,7 +2,7 @@ import { type GlobalState } from '../../reducers/redux/watchSlice'
 import { type IBrands } from '../../types/BrandsInterface'
 import { type IWatch } from '../../types/WatchInterface'
 import { type IWatches } from '../../types/WatchesInterface'
-import { type ISearchModel } from '../isValidIWatchKey'
+import { type ISearchModel } from '../isValidKeyword'
 import _ from 'lodash'
 
 class WatchQueryProcessor {
