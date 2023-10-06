@@ -9,19 +9,24 @@ import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { includeInSearch } from '../../reducers/redux/searchSlice'
 import { useEffect } from 'react'
 import { watch } from 'fs'
+import { IWatch } from '../../types/WatchInterface'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
     const { watchesData } = useAppSelector((state) => state.watch)
     const dispatch = useAppDispatch()
     const [searchParams] = useSearchParams()
+    let result: IWatch[] | undefined
 
     useEffect(() => {
-        // readQueryString(searchParams, search, dispatch)
-        dispatch(includeInSearch({ key: 'brand', value: 'pigget' }))
+        readQueryString(searchParams, search, dispatch)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // result = filterResult(search, watchesData?.watches)
+        console.log('entra')
         console.log(search)
     }, [search])
 

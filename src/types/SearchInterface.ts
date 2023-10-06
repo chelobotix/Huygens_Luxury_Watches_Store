@@ -1,15 +1,15 @@
 interface ISearch {
-    name: string[]
-    brand: string[]
-    minPrice: string[]
-    maxPrice: string[]
-    gender: string[]
-    caseMaterial: string[]
-    movement: string[]
-    dialColor: string[]
-    caseBack: string[]
-    strapMaterial: string[]
-    strapColor: string[]
+    name: string | null
+    brand: string | null
+    minPrice: string | null
+    maxPrice: string | null
+    gender: string | null
+    caseMaterial: string | null
+    movement: string | null
+    dialColor: string | null
+    caseBack: string | null
+    strapMaterial: string | null
+    strapColor: string | null
 }
 
 export { type ISearch }

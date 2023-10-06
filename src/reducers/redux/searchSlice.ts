@@ -1,23 +1,20 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { type ISearch } from '../../types/SearchInterface'
 
-interface PropertyAction {
-    key: keyof ISearch
-    value: any
-}
+type PropertyAction = Record<string, string>
 
 const initialState: ISearch = {
-    name: [],
-    brand: [],
-    minPrice: [],
-    maxPrice: [],
-    gender: [],
-    caseMaterial: [],
-    movement: [],
-    dialColor: [],
-    caseBack: [],
-    strapMaterial: [],
-    strapColor: [],
+    name: null,
+    brand: null,
+    minPrice: null,
+    maxPrice: null,
+    gender: null,
+    caseMaterial: null,
+    movement: null,
+    dialColor: null,
+    caseBack: null,
+    strapMaterial: null,
+    strapColor: null,
 }
 
 /* ---------------------------------- Slice --------------------------------- */
@@ -26,9 +23,7 @@ const SearchSlice = createSlice({
     initialState,
     reducers: {
         includeInSearch: (state, action: PayloadAction<PropertyAction>) => {
-            const { key, value } = action.payload
-
-            state[key] = [...state[key], value]
+            return { ...state, ...action.payload }
         },
     },
 })
