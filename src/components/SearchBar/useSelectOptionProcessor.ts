@@ -1,8 +1,7 @@
-import { isKey } from '../../helpers/isKey'
-import { useAppSelector } from '../../reducers/redux/store'
 import _ from 'lodash'
+import { isKey } from '../../helpers/isKey'
 import { type IOptions } from '../../types/OptionInterface'
-import { IWatch } from '../../types/WatchInterface'
+import { type IWatch } from '../../types/WatchInterface'
 
 const options: IOptions = {
     brand: [],

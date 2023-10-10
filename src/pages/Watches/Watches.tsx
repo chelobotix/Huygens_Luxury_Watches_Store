@@ -13,13 +13,12 @@ import { UseSelectOptionProcessor } from '../../components/SearchBar/useSelectOp
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
     const { watchesData } = useAppSelector((state) => state.watch)
-    console.log('🚀 ~ file: Watches.tsx:16 ~ watchesData:', watchesData)
     const [flag, setFlag] = useState<boolean>(false)
     const [result, setResult] = useState<IWatch[] | undefined>(undefined)
     const [searchParams] = useSearchParams()
-    const paramObj = readQueryString(searchParams, search)
-    const dispatch = useAppDispatch()
     const options = UseSelectOptionProcessor(watchesData?.watches)
+    const paramObj = readQueryString(searchParams, search, options)
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (flag) {
