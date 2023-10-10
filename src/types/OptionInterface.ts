@@ -1,6 +1,6 @@
 interface IOptions {
     brand: string[]
-    price: number[] | string[]
+    price: string[]
     gender: string[]
     caseMaterial: string[]
     movement: string[]

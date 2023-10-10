@@ -10,7 +10,8 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ options }) => {
     const handleSelection = (title: string, item: string): void => {
-        if (_.lowerCase(title) === 'brand' || _.lowerCase(title) === 'gender') {
+        //! la logica de busqueda de multi, lo demas funciona
+        if (title === 'brand' || title === 'gender') {
             window.open(isKeywordDuplicate(window.location.href, title, item), '_self')
         } else if (_.lowerCase(title) === 'price') {
             console.log('price')

@@ -26,7 +26,6 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
     const [badgeCounter, setBadgeCounter] = useState<number>(getBadgeNumber(search[title as keyof ISearch]))
-
     const handleClickButton = (): void => {
         setIsOpen((prev) => !prev)
     }
@@ -45,7 +44,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                 if (selectedItems === '') {
                     setSelectedItems(item)
                 } else {
-                    setSelectedItems(`${selectedItems},${item}`)
+                    setSelectedItems(`${selectedItems},${_.lowerCase(item)}`)
                 }
 
                 setBadgeCounter(badgeCounter + 1)
@@ -77,9 +76,9 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                     handleClickItem(item)
                                 }}
                                 key={uuidv4()}
-                                className={selectedItems.includes(item) ? 'selected' : ''}
+                                className={selectedItems.includes(_.lowerCase(item)) ? 'selected' : ''}
                             >
-                                {item}
+                                {_.startCase(item)}
                             </li>
                         ))}
                         {isMulti && (

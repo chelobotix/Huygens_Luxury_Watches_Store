@@ -6,7 +6,7 @@ import { type IWatch } from '../../types/WatchInterface'
 const options: IOptions = {
     brand: [],
     price: [],
-    gender: ['Male', 'Female'],
+    gender: ['male', 'female'],
     caseMaterial: [],
     movement: [],
     dialColor: [],
@@ -19,25 +19,25 @@ const UseSelectOptionProcessor = (watches: IWatch[] | undefined): IOptions => {
     // Get all options from the API
     watches?.forEach((watch) => {
         if (watch.brand !== undefined) {
-            options.brand.push(watch.brand)
+            options.brand.push(_.lowerCase(watch.brand))
         }
         if (watch.caseMaterial !== undefined) {
-            options.caseMaterial.push(watch.caseMaterial)
+            options.caseMaterial.push(_.lowerCase(watch.caseMaterial))
         }
         if (watch.movement !== undefined) {
-            options.movement.push(watch.movement)
+            options.movement.push(_.lowerCase(watch.movement))
         }
         if (watch.dialColor !== undefined) {
-            options.dialColor.push(watch.dialColor)
+            options.dialColor.push(_.lowerCase(watch.dialColor))
         }
         if (watch.caseBack !== undefined) {
-            options.caseBack.push(watch.caseBack)
+            options.caseBack.push(_.lowerCase(watch.caseBack))
         }
         if (watch.strapMaterial !== undefined) {
-            options.strapMaterial.push(watch.strapMaterial)
+            options.strapMaterial.push(_.lowerCase(watch.strapMaterial))
         }
         if (watch.strapColor !== undefined) {
-            options.strapColor.push(watch.strapColor)
+            options.strapColor.push(_.lowerCase(watch.strapColor))
         }
     })
 
@@ -47,6 +47,7 @@ const UseSelectOptionProcessor = (watches: IWatch[] | undefined): IOptions => {
             options[key] = _.union(value)
         }
     })
+
     return options
 }
 
