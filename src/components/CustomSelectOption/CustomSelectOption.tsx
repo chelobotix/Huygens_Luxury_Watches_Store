@@ -7,6 +7,11 @@ import _ from 'lodash'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { StyledContainer } from './CustomSelectOption.styled'
+import { useAppSelector, useAppDispatch } from '../../reducers/redux/store'
+import { type ISearch } from '../../types/SearchInterface'
+import { includeInSearch } from '../../reducers/redux/searchSlice'
+import { filterString } from '../../helpers/filterString'
+import { getBadgeNumber } from '../../helpers/getBadgeNumber'
 
 interface CustomSelectOptionProps {
     title: string
@@ -16,10 +21,11 @@ interface CustomSelectOptionProps {
 }
 
 const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti, handleSelection }) => {
+    const search = useAppSelector((state) => state.search)
+    const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const [selectedItems, setSelectedItems] = useState<string[]>([])
-    const [badgeCounter, setBadgeCounter] = useState<number>(0)
-    console.log(selectedItems)
+    const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
+    const [badgeCounter, setBadgeCounter] = useState<number>(getBadgeNumber(search[title as keyof ISearch]))
 
     const handleClickButton = (): void => {
         setIsOpen((prev) => !prev)
@@ -32,10 +38,16 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const handleClickItem = (item: string): void => {
         if (isMulti) {
             if (selectedItems.includes(item)) {
-                setSelectedItems((prev) => prev.filter((x) => x !== item))
+                const newParamString = filterString(selectedItems, item)
+                setSelectedItems(newParamString)
                 setBadgeCounter(badgeCounter - 1)
             } else {
-                setSelectedItems((prev) => [...prev, _.camelCase(item)])
+                if (selectedItems === '') {
+                    setSelectedItems(item)
+                } else {
+                    setSelectedItems(`${selectedItems},${item}`)
+                }
+
                 setBadgeCounter(badgeCounter + 1)
             }
         } else {
@@ -45,8 +57,8 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
 
     return (
         <StyledContainer>
-            <div className="divAbsolute">
-                <Badge badgeContent={badgeCounter} color="primary">
+            <div ref={ref} className="divAbsolute">
+                <Badge badgeContent={badgeCounter} color="primary" invisible={!isMulti}>
                     <Button
                         onClick={handleClickButton}
                         variant="outlined"
@@ -58,14 +70,14 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                 </Badge>
 
                 <Fade in={isOpen}>
-                    <ul ref={ref} className={isOpen ? 'visible' : 'invisible'}>
+                    <ul className={isOpen ? 'visible' : 'invisible'}>
                         {items.map((item) => (
                             <li
                                 onClick={() => {
                                     handleClickItem(item)
                                 }}
                                 key={uuidv4()}
-                                className={selectedItems.includes(_.camelCase(item)) ? 'selected' : ''}
+                                className={selectedItems.includes(item) ? 'selected' : ''}
                             >
                                 {item}
                             </li>
@@ -74,7 +86,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                             <div>
                                 <Button
                                     onClick={() => {
-                                        setSelectedItems([])
+                                        setSelectedItems('')
                                     }}
                                     variant="contained"
                                 >
@@ -82,7 +94,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                 </Button>
                                 <Button
                                     onClick={() => {
-                                        handleSelection(title, selectedItems.toString())
+                                        handleSelection(title, selectedItems)
                                     }}
                                     variant="contained"
                                     disabled={selectedItems.length === 0}

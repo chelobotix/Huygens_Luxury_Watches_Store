@@ -2,20 +2,13 @@ import _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 import { isKeywordDuplicate } from '../../helpers/isKeywordDuplicate'
 import { CustomSelectOption } from '../CustomSelectOption/CustomSelectOption'
-import { selectOptionProcessor } from './selectOptionProcessor'
+import { type IOptions } from '../../types/OptionInterface'
 
 interface SearchBarProps {
-    validParams: Record<string, string> | undefined
+    options: IOptions
 }
 
-// const searchSelection: Array<{ label: string; items: Array<{ value: string; label: string }> }> = []
-
-const SearchBar: React.FC<SearchBarProps> = ({ validParams }) => {
-    console.log('valid', validParams)
-
-    const options = selectOptionProcessor()
-    console.log('option', options)
-
+const SearchBar: React.FC<SearchBarProps> = ({ options }) => {
     const handleSelection = (title: string, item: string): void => {
         if (_.lowerCase(title) === 'brand' || _.lowerCase(title) === 'gender') {
             window.open(isKeywordDuplicate(window.location.href, title, item), '_self')
@@ -30,28 +23,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ validParams }) => {
             {Object.entries(options).map(([key, value]) => {
                 if (key === 'price') {
                     return false
+                } else if (value.length > 0) {
+                    return (
+                        <CustomSelectOption
+                            key={uuidv4()}
+                            title={key}
+                            items={value}
+                            isMulti={!(key === 'gender' || key === 'brand')}
+                            handleSelection={handleSelection}
+                        />
+                    )
                 } else {
-                    if (key === 'gender' || key === 'brand') {
-                        return (
-                            <CustomSelectOption
-                                key={uuidv4()}
-                                title={key}
-                                items={value}
-                                isMulti={false}
-                                handleSelection={handleSelection}
-                            />
-                        )
-                    } else {
-                        return (
-                            <CustomSelectOption
-                                key={uuidv4()}
-                                title={key}
-                                items={value}
-                                isMulti={true}
-                                handleSelection={handleSelection}
-                            />
-                        )
-                    }
+                    return null
                 }
             })}
         </div>

@@ -4,10 +4,9 @@ import _ from 'lodash'
 
 const filterResult = (search: ISearch, watches: IWatch[] | undefined): IWatch[] | undefined => {
     let result: IWatch[] | undefined
-    console.log(search)
     Object.entries(search).forEach((item) => {
         const [key, value] = item
-        if (value !== null) {
+        if (value !== '') {
             if (value.includes(',') === true) {
                 const target = value.split(',').map((item: string) => _.camelCase(item))
 

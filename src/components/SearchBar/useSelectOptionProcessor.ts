@@ -1,18 +1,8 @@
 import { isKey } from '../../helpers/isKey'
 import { useAppSelector } from '../../reducers/redux/store'
 import _ from 'lodash'
-
-interface IOptions {
-    brand: string[]
-    price: number[] | string[]
-    gender: string[]
-    caseMaterial: string[]
-    movement: string[]
-    dialColor: string[]
-    caseBack: string[]
-    strapMaterial: string[]
-    strapColor: string[]
-}
+import { type IOptions } from '../../types/OptionInterface'
+import { IWatch } from '../../types/WatchInterface'
 
 const options: IOptions = {
     brand: [],
@@ -26,11 +16,9 @@ const options: IOptions = {
     strapColor: [],
 }
 
-const selectOptionProcessor = (): IOptions => {
-    const { watchesData } = useAppSelector((state) => state.watch)
-
+const UseSelectOptionProcessor = (watches: IWatch[] | undefined): IOptions => {
     // Get all options from the API
-    watchesData?.watches.forEach((watch) => {
+    watches?.forEach((watch) => {
         if (watch.brand !== undefined) {
             options.brand.push(watch.brand)
         }
@@ -60,8 +48,7 @@ const selectOptionProcessor = (): IOptions => {
             options[key] = _.union(value)
         }
     })
-
     return options
 }
 
-export { selectOptionProcessor }
+export { UseSelectOptionProcessor }

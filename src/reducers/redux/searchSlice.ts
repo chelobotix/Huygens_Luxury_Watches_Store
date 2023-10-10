@@ -4,17 +4,17 @@ import { type ISearch } from '../../types/SearchInterface'
 type PropertyAction = Record<string, string>
 
 const initialState: ISearch = {
-    name: null,
-    brand: null,
-    minPrice: null,
-    maxPrice: null,
-    gender: null,
-    caseMaterial: null,
-    movement: null,
-    dialColor: null,
-    caseBack: null,
-    strapMaterial: null,
-    strapColor: null,
+    name: '',
+    brand: '',
+    minPrice: '',
+    maxPrice: '',
+    gender: '',
+    caseMaterial: '',
+    movement: '',
+    dialColor: '',
+    caseBack: '',
+    strapMaterial: '',
+    strapColor: '',
 }
 
 /* ---------------------------------- Slice --------------------------------- */

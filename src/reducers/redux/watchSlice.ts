@@ -5,34 +5,31 @@ import { type IBrands } from '../../types/BrandsInterface'
 interface GlobalState {
     watchesData: IWatches | null
     brandsData: IBrands | null
-    isLoading: boolean
+    isLoading: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string | undefined
 }
 
 const initialState: GlobalState = {
     watchesData: null,
     brandsData: null,
-    isLoading: true,
+    isLoading: 'idle',
     error: undefined,
 }
 
 /* ---------------------------------- Fetch --------------------------------- */
 // Fetch Watches Data
-const fetchWatchesGet = createAsyncThunk(
-    'fetchWatchesGet',
-    async (fetchProps: { url: string; target: string }) => {
-        const { url, target } = fetchProps
-        try {
-            const response = await fetch(url)
-            const json = await response.json()
-            const data = await json
-            return { response: await data, target }
-        } catch (error) {
-            console.log(error)
-            throw error
-        }
+const fetchWatchesGet = createAsyncThunk('fetchWatchesGet', async (fetchProps: { url: string; target: string }) => {
+    const { url, target } = fetchProps
+    try {
+        const response = await fetch(url)
+        const json = await response.json()
+        const data = await json
+        return { response: await data, target }
+    } catch (error) {
+        console.log(error)
+        throw error
     }
-)
+})
 
 /* ---------------------------------- Slice --------------------------------- */
 const WatchSlice = createSlice({
@@ -41,11 +38,10 @@ const WatchSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchWatchesGet.pending, (state) => {
-            state.isLoading = true
+            state.isLoading = 'loading'
         })
 
         builder.addCase(fetchWatchesGet.fulfilled, (state, action: PayloadAction<any>) => {
-            state.isLoading = false
             switch (action.payload.target) {
                 case 'watches':
                     state.watchesData = action.payload.response
@@ -56,11 +52,12 @@ const WatchSlice = createSlice({
                 default:
                     break
             }
+            state.isLoading = 'succeeded'
             // state.watchesData = action.payload
         })
 
         builder.addCase(fetchWatchesGet.rejected, (state, action) => {
-            state.isLoading = false
+            state.isLoading = 'failed'
             state.error = action.error.message
         })
     },
