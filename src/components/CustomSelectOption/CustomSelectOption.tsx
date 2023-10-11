@@ -11,15 +11,15 @@ import { useAppSelector } from '../../reducers/redux/store'
 import { type ISearch } from '../../types/SearchInterface'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
+import { openSearchSelection } from '../../helpers/openSearchSelection'
 
 interface CustomSelectOptionProps {
     title: string
     items: string[]
     isMulti: boolean
-    handleSelection: (title: string, item: string) => void
 }
 
-const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti, handleSelection }) => {
+const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti }) => {
     const search = useAppSelector((state) => state.search)
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
@@ -53,7 +53,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                 setBadgeCounter(badgeCounter + 1)
             }
         } else {
-            handleSelection(title, item)
+            openSearchSelection(title, item)
         }
     }
 
@@ -91,7 +91,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                         setSelectedItems('')
                                         setBadgeCounter(0)
                                         setIsOpen(false)
-                                        handleSelection(title, 'nothing')
+                                        openSearchSelection(title, 'nothing')
                                     }}
                                     variant="contained"
                                 >
@@ -99,7 +99,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                 </Button>
                                 <Button
                                     onClick={() => {
-                                        handleSelection(title, selectedItems)
+                                        openSearchSelection(title, selectedItems)
                                     }}
                                     variant="contained"
                                     disabled={selectedItems.length === 0}

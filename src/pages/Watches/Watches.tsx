@@ -1,14 +1,15 @@
-import { useSearchParams } from 'react-router-dom'
-import { readQueryString } from '../../helpers/readQueryString'
-import { filterResult } from './filterResults'
-import { SearchBar } from '../../components/SearchBar/SearchBar'
-import { WatchCard } from '../../components/WatchCard/WatchCard'
-import { v4 as uuidv4 } from 'uuid'
-import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
-import { includeInSearch, initialState } from '../../reducers/redux/searchSlice'
 import { useEffect, useState } from 'react'
-import { type IWatch } from '../../types/WatchInterface'
+import { useSearchParams } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
+import { SearchBar } from '../../components/SearchBar/SearchBar'
 import { UseSelectOptionProcessor } from '../../components/SearchBar/useSelectOptionProcessor'
+import { SearchKeywordsBar } from '../../components/SearchKeywordsBar/SearchKeywordsBar'
+import { WatchCard } from '../../components/WatchCard/WatchCard'
+import { readQueryString } from '../../helpers/readQueryString'
+import { includeInSearch, initialState } from '../../reducers/redux/searchSlice'
+import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
+import { type IWatch } from '../../types/WatchInterface'
+import { filterResult } from './filterResults'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
@@ -37,7 +38,7 @@ const Watches: React.FC = () => {
         <div>
             <SearchBar options={options} />
 
-            {/* {validParams !== null && <SearchKeywordsBar validParams={validParams as Record<string, string>} />} */}
+            <SearchKeywordsBar />
             {result !== undefined ? (
                 result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
             ) : (
