@@ -22,7 +22,7 @@ const SearchSlice = createSlice({
     name: 'Search',
     initialState,
     reducers: {
-        includeInSearch: (state, action: PayloadAction<PropertyAction>) => {
+        includeInSearch: (state, action: PayloadAction<PropertyAction | ISearch>) => {
             return { ...state, ...action.payload }
         },
     },
@@ -30,3 +30,4 @@ const SearchSlice = createSlice({
 
 export const { includeInSearch } = SearchSlice.actions
 export default SearchSlice.reducer
+export { initialState }

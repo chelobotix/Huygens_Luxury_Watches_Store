@@ -5,7 +5,7 @@ import { SearchBar } from '../../components/SearchBar/SearchBar'
 import { WatchCard } from '../../components/WatchCard/WatchCard'
 import { v4 as uuidv4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
-import { includeInSearch } from '../../reducers/redux/searchSlice'
+import { includeInSearch, initialState } from '../../reducers/redux/searchSlice'
 import { useEffect, useState } from 'react'
 import { type IWatch } from '../../types/WatchInterface'
 import { UseSelectOptionProcessor } from '../../components/SearchBar/useSelectOptionProcessor'
@@ -24,6 +24,9 @@ const Watches: React.FC = () => {
         if (flag) {
             setResult(filterResult(search, watchesData?.watches))
         } else {
+            // restart the search state
+            dispatch(includeInSearch(initialState))
+            // add search params to state
             dispatch(includeInSearch(paramObj))
             setFlag(true)
         }

@@ -4,12 +4,11 @@ import { Badge, Button } from '@mui/material'
 import Fade from '@mui/material/Fade'
 import { useClickAway } from '@uidotdev/usehooks'
 import _ from 'lodash'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { StyledContainer } from './CustomSelectOption.styled'
-import { useAppSelector, useAppDispatch } from '../../reducers/redux/store'
+import { useAppSelector } from '../../reducers/redux/store'
 import { type ISearch } from '../../types/SearchInterface'
-import { includeInSearch } from '../../reducers/redux/searchSlice'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
 
@@ -22,10 +21,9 @@ interface CustomSelectOptionProps {
 
 const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti, handleSelection }) => {
     const search = useAppSelector((state) => state.search)
-    const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
-    const [badgeCounter, setBadgeCounter] = useState<number>(getBadgeNumber(search[title as keyof ISearch]))
+    const [badgeCounter, setBadgeCounter] = useState<number>(0)
     const handleClickButton = (): void => {
         setIsOpen((prev) => !prev)
     }
@@ -33,6 +31,11 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const ref: any = useClickAway(() => {
         setIsOpen(false)
     })
+
+    useEffect(() => {
+        setBadgeCounter(getBadgeNumber(search[title as keyof ISearch]))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [setBadgeCounter])
 
     const handleClickItem = (item: string): void => {
         if (isMulti) {
@@ -86,6 +89,9 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                 <Button
                                     onClick={() => {
                                         setSelectedItems('')
+                                        setBadgeCounter(0)
+                                        setIsOpen(false)
+                                        handleSelection(title, 'nothing')
                                     }}
                                     variant="contained"
                                 >
