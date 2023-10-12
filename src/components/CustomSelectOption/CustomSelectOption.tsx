@@ -7,11 +7,12 @@ import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { StyledContainer } from './CustomSelectOption.styled'
-import { useAppSelector } from '../../reducers/redux/store'
+import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { type ISearch } from '../../types/SearchInterface'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
 import { openSearchSelection } from '../../helpers/openSearchSelection'
+import { includeInSearch } from '../../reducers/redux/searchSlice'
 
 interface CustomSelectOptionProps {
     title: string
@@ -21,6 +22,8 @@ interface CustomSelectOptionProps {
 
 const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti }) => {
     const search = useAppSelector((state) => state.search)
+    const dispatch = useAppDispatch()
+    const [flag, setFlag] = useState(false)
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
@@ -57,6 +60,22 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
         }
     }
 
+    const handleClear = (): void => {
+        setSelectedItems('')
+        setBadgeCounter(0)
+        setIsOpen(false)
+        dispatch(includeInSearch({ [title]: '' }))
+        setFlag(true)
+        console.log('aqui')
+    }
+
+    useEffect(() => {
+        console.log('effect')
+        if (flag) {
+            console.log('acabo dispatch')
+        }
+    }, [search, flag])
+
     return (
         <StyledContainer>
             <div ref={ref} className="divAbsolute">
@@ -86,15 +105,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                         ))}
                         {isMulti && (
                             <div>
-                                <Button
-                                    onClick={() => {
-                                        setSelectedItems('')
-                                        setBadgeCounter(0)
-                                        setIsOpen(false)
-                                        openSearchSelection(title, 'nothing')
-                                    }}
-                                    variant="contained"
-                                >
+                                <Button onClick={handleClear} variant="contained">
                                     Clear
                                 </Button>
                                 <Button

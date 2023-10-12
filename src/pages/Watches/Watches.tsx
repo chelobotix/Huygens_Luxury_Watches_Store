@@ -10,6 +10,8 @@ import { includeInSearch, initialState } from '../../reducers/redux/searchSlice'
 import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { type IWatch } from '../../types/WatchInterface'
 import { filterResult } from './filterResults'
+import { searchQueryConstructor } from './searchQueryConstructor'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
@@ -23,6 +25,7 @@ const Watches: React.FC = () => {
 
     useEffect(() => {
         if (flag) {
+            searchQueryConstructor(search)
             setResult(filterResult(search, watchesData?.watches))
         } else {
             // restart the search state
@@ -39,10 +42,13 @@ const Watches: React.FC = () => {
             <SearchBar options={options} />
 
             <SearchKeywordsBar />
+
+            {!flag && <CircularProgress />}
+
             {result !== undefined ? (
                 result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
             ) : (
-                <h2>Loading...</h2>
+                <h2>Nothing Found</h2>
             )}
         </div>
     )
