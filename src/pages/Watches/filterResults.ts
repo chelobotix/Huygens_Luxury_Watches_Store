@@ -33,6 +33,10 @@ const filterResult = (search: ISearch, watches: IWatch[] | undefined): IWatch[] 
         }
     })
 
+    if (result === undefined) {
+        result = watches
+    }
+
     return result
 }
 

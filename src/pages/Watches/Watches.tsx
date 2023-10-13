@@ -6,7 +6,7 @@ import { UseSelectOptionProcessor } from '../../components/SearchBar/useSelectOp
 import { SearchKeywordsBar } from '../../components/SearchKeywordsBar/SearchKeywordsBar'
 import { WatchCard } from '../../components/WatchCard/WatchCard'
 import { readQueryString } from '../../helpers/readQueryString'
-import { editSearch, initialState, setCompleted } from '../../reducers/redux/searchSlice'
+import { editSearch, initialState } from '../../reducers/redux/searchSlice'
 import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { type IWatch } from '../../types/WatchInterface'
 import { filterResult } from './filterResults'
@@ -17,6 +17,7 @@ const Watches: React.FC = () => {
     const [flag, setFlag] = useState(false)
     const { watchesData } = useAppSelector((state) => state.watch)
     const [result, setResult] = useState<IWatch[] | undefined>(undefined)
+    console.log('🚀 ~ file: Watches.tsx:20 ~ result:', result)
     const [searchParams] = useSearchParams()
     const options = UseSelectOptionProcessor(watchesData?.watches)
     const paramObj = readQueryString(searchParams, search, options)
@@ -42,7 +43,7 @@ const Watches: React.FC = () => {
             <SearchKeywordsBar />
 
             {flag ? (
-                result !== undefined ? (
+                result !== undefined && result.length > 0 ? (
                     result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
                 ) : (
                     <h2>Nothing Found</h2>
