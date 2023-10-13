@@ -13,7 +13,7 @@ const searchQueryConstructor = (search: ISearch): string => {
             }
         }
     })
-    console.log(window.location.protocol)
+
     return `/watches?${query}`
 }
 

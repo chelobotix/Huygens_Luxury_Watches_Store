@@ -39,7 +39,7 @@ const Watches: React.FC = () => {
         <div>
             <SearchBar options={options} />
 
-            {/* <SearchKeywordsBar /> */}
+            <SearchKeywordsBar />
 
             {flag ? (
                 result !== undefined ? (

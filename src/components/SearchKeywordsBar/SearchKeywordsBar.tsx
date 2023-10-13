@@ -4,7 +4,7 @@ import Chip from '@mui/material/Chip'
 import { useEffect, useState } from 'react'
 import { filteredKeywords } from './filteredKeywords'
 import _ from 'lodash'
-import { openSearchSelection } from '../../helpers/openSearchSelection'
+import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
 
 const SearchKeywordsBar: React.FC = () => {
     const search = useAppSelector((state) => state.search)
@@ -16,7 +16,11 @@ const SearchKeywordsBar: React.FC = () => {
     }, [search])
 
     const handleRemoveSearchKey = (keyword: string): void => {
-        console.log(_.camelCase(keyword))
+        if (keyword === `Men's` || keyword === `Women's`) {
+            window.open(searchQueryConstructor({ ...search, gender: '' }), '_self')
+        } else {
+            window.open(searchQueryConstructor({ ...search, [_.camelCase(keyword)]: '' }), '_self')
+        }
     }
 
     return (
@@ -24,7 +28,12 @@ const SearchKeywordsBar: React.FC = () => {
             <ul>
                 {keywords?.map((keyword) => (
                     <li key={uuidv4()}>
-                        <Chip label={keyword} onDelete={() => handleRemoveSearchKey(keyword)} />
+                        <Chip
+                            label={keyword}
+                            onDelete={() => {
+                                handleRemoveSearchKey(keyword)
+                            }}
+                        />
                     </li>
                 ))}
             </ul>

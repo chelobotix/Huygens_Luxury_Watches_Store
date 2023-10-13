@@ -7,12 +7,10 @@ import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { StyledContainer } from './CustomSelectOption.styled'
-import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
+import { useAppSelector } from '../../reducers/redux/store'
 import { type ISearch } from '../../types/SearchInterface'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
-import { openSearchSelection } from '../../helpers/openSearchSelection'
-import { editSearch } from '../../reducers/redux/searchSlice'
 import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
 
 interface CustomSelectOptionProps {
@@ -23,7 +21,6 @@ interface CustomSelectOptionProps {
 
 const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti }) => {
     const search = useAppSelector((state) => state.search)
-    const dispatch = useAppDispatch()
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
