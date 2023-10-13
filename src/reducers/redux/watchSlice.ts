@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/tool
 import { type IWatches } from '../../types/WatchesInterface'
 import { type IBrands } from '../../types/BrandsInterface'
 
-interface GlobalState {
+interface GlobalWatchState {
     watchesData: IWatches | null
     brandsData: IBrands | null
     isLoading: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string | undefined
 }
 
-const initialState: GlobalState = {
+const initialState: GlobalWatchState = {
     watchesData: null,
     brandsData: null,
     isLoading: 'idle',
@@ -63,5 +63,5 @@ const WatchSlice = createSlice({
     },
 })
 
-export { fetchWatchesGet, type GlobalState }
+export { fetchWatchesGet, type GlobalWatchState }
 export default WatchSlice.reducer

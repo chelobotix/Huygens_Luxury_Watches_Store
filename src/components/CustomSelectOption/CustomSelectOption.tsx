@@ -12,7 +12,8 @@ import { type ISearch } from '../../types/SearchInterface'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
 import { openSearchSelection } from '../../helpers/openSearchSelection'
-import { includeInSearch } from '../../reducers/redux/searchSlice'
+import { editSearch } from '../../reducers/redux/searchSlice'
+import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
 
 interface CustomSelectOptionProps {
     title: string
@@ -23,7 +24,6 @@ interface CustomSelectOptionProps {
 const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti }) => {
     const search = useAppSelector((state) => state.search)
     const dispatch = useAppDispatch()
-    const [flag, setFlag] = useState(false)
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
@@ -56,25 +56,20 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                 setBadgeCounter(badgeCounter + 1)
             }
         } else {
-            openSearchSelection(title, item)
+            window.open(searchQueryConstructor({ ...search, [title]: item }), '_self')
         }
+    }
+
+    const handleSave = (): void => {
+        window.open(searchQueryConstructor({ ...search, [title]: selectedItems }), '_self')
     }
 
     const handleClear = (): void => {
         setSelectedItems('')
         setBadgeCounter(0)
         setIsOpen(false)
-        dispatch(includeInSearch({ [title]: '' }))
-        setFlag(true)
-        console.log('aqui')
+        window.open(searchQueryConstructor({ ...search, [title]: '' }), '_self')
     }
-
-    useEffect(() => {
-        console.log('effect')
-        if (flag) {
-            console.log('acabo dispatch')
-        }
-    }, [search, flag])
 
     return (
         <StyledContainer>
@@ -108,13 +103,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                                 <Button onClick={handleClear} variant="contained">
                                     Clear
                                 </Button>
-                                <Button
-                                    onClick={() => {
-                                        openSearchSelection(title, selectedItems)
-                                    }}
-                                    variant="contained"
-                                    disabled={selectedItems.length === 0}
-                                >
+                                <Button onClick={handleSave} variant="contained" disabled={selectedItems.length === 0}>
                                     Save
                                 </Button>
                             </div>

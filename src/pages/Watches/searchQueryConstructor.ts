@@ -1,7 +1,6 @@
 import { type ISearch } from '../../types/SearchInterface'
 
 const searchQueryConstructor = (search: ISearch): string => {
-    const location = window.location
     let query = ''
 
     // Generate string query
@@ -14,7 +13,8 @@ const searchQueryConstructor = (search: ISearch): string => {
             }
         }
     })
-    return `${location.host}/watches?${query}`
+    console.log(window.location.protocol)
+    return `/watches?${query}`
 }
 
 export { searchQueryConstructor }
