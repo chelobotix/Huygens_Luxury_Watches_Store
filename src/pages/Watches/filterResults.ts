@@ -2,12 +2,23 @@ import { type ISearch } from '../../types/SearchInterface'
 import { type IWatch } from '../../types/WatchInterface'
 import _ from 'lodash'
 
+//! refactor this
 const filterResult = (search: ISearch, watches: IWatch[] | undefined): IWatch[] | undefined => {
     let result: IWatch[] | undefined
     Object.entries(search).forEach((item) => {
         const [key, value] = item
         if (value !== '') {
-            if (value.includes(',') === true) {
+            if (key === 'minPrice') {
+                if (result === undefined) {
+                    result = watches?.filter(
+                        (watch) => watch.price >= parseInt(search.minPrice) && watch.price <= parseInt(search.maxPrice)
+                    )
+                } else {
+                    result = result.filter(
+                        (watch) => watch.price >= parseInt(search.minPrice) && watch.price <= parseInt(search.maxPrice)
+                    )
+                }
+            } else if (value.includes(',') === true) {
                 const target = value.split(',').map((item: string) => _.camelCase(item))
 
                 if (result === undefined) {
@@ -19,7 +30,7 @@ const filterResult = (search: ISearch, watches: IWatch[] | undefined): IWatch[] 
                         target.includes(_.camelCase(watch[key as keyof IWatch] as string))
                     )
                 }
-            } else {
+            } else if (key !== 'maxPrice') {
                 if (result === undefined) {
                     result = watches?.filter(
                         (watch) => _.camelCase(watch[key as keyof IWatch] as string) === _.camelCase(value)

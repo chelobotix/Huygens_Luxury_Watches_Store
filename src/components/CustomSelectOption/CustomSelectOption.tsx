@@ -24,6 +24,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
+
     const handleClickButton = (): void => {
         setIsOpen((prev) => !prev)
     }

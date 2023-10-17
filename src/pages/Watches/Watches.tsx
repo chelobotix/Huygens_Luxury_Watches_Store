@@ -17,7 +17,6 @@ const Watches: React.FC = () => {
     const [flag, setFlag] = useState(false)
     const { watchesData } = useAppSelector((state) => state.watch)
     const [result, setResult] = useState<IWatch[] | undefined>(undefined)
-    console.log('🚀 ~ file: Watches.tsx:20 ~ result:', result)
     const [searchParams] = useSearchParams()
     const options = UseSelectOptionProcessor(watchesData?.watches)
     const paramObj = readQueryString(searchParams, search, options)

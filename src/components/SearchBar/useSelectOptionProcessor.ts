@@ -5,8 +5,8 @@ import { type IWatch } from '../../types/WatchInterface'
 
 const options: IOptions = {
     brand: [],
-    price: [],
     gender: ['male', 'female'],
+    price: ['0'],
     caseMaterial: [],
     movement: [],
     dialColor: [],
