@@ -20,21 +20,25 @@ const readQueryString = (searchParams: URLSearchParams, search: ISearch, options
                 })
                 paramObj[param] = validValues.join(',')
             } else {
-                if (param === 'minPrice' && isNumber(parseInt(value))) {
+                if (param === 'minPrice' && isNumber(parseInt(value)) && value !== '') {
                     paramObj[param] = value
-                } else if (param === 'maxPrice' && isNumber(parseInt(value))) {
-                    paramObj[param] = value
+                } else if (param === 'maxPrice' && isNumber(parseInt(value)) && value !== '') {
+                    if (parseInt(value) > Number.MAX_SAFE_INTEGER || parseInt(value) >= 300000) {
+                        paramObj[param] = Number.MAX_SAFE_INTEGER.toString()
+                    } else {
+                        paramObj[param] = value
+                    }
                 } else if (options[param as keyof IOptions].includes(_.lowerCase(value))) {
                     paramObj[param] = _.lowerCase(value)
                 }
             }
         }
     }
-    if (!('minPrice' in paramObj)) {
+    if (!('minPrice' in paramObj) && 'maxPrice' in paramObj) {
         paramObj.minPrice = '0'
     }
-    if (!('maxPrice' in paramObj)) {
-        paramObj.maxPrice = '300000'
+    if (!('maxPrice' in paramObj) && 'minPrice' in paramObj) {
+        paramObj.maxPrice = Number.MAX_SAFE_INTEGER.toString()
     }
 
     return paramObj

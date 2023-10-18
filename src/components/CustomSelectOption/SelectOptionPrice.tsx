@@ -1,5 +1,5 @@
 import Slider from '@mui/material/Slider'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StyledContainer } from './CustomSelectOption.styled'
 import { useClickAway } from '@uidotdev/usehooks'
 import { Button, Fade } from '@mui/material'
@@ -10,8 +10,16 @@ import { useAppSelector } from '../../reducers/redux/store'
 
 const SelectOptionPrice: React.FC = () => {
     const search = useAppSelector((state) => state.search)
+    let maxPrice = parseInt(search.maxPrice)
+    if (parseInt(search.maxPrice) >= 300000) {
+        maxPrice = 300000
+    }
     const [range, setRange] = useState<number[]>([0, 300000])
     const [isOpen, setIsOpen] = useState<boolean>(false)
+
+    useEffect(() => {
+        setRange([parseInt(search.minPrice), maxPrice])
+    }, [])
 
     const ref: any = useClickAway(() => {
         setIsOpen(false)
