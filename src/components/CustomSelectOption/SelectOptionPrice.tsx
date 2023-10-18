@@ -10,15 +10,22 @@ import { useAppSelector } from '../../reducers/redux/store'
 
 const SelectOptionPrice: React.FC = () => {
     const search = useAppSelector((state) => state.search)
+
     let maxPrice = parseInt(search.maxPrice)
     if (parseInt(search.maxPrice) >= 300000) {
         maxPrice = 300000
     }
     const [range, setRange] = useState<number[]>([0, 300000])
+    console.log('🚀 ~ file: SelectOptionPrice.tsx:18 ~ range:', range)
+
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     useEffect(() => {
-        setRange([parseInt(search.minPrice), maxPrice])
+        if (search.minPrice !== '') {
+            setRange([parseInt(search.minPrice), maxPrice])
+        } else {
+            setRange([0, 300000])
+        }
     }, [])
 
     const ref: any = useClickAway(() => {

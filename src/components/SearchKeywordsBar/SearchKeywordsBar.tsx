@@ -18,6 +18,8 @@ const SearchKeywordsBar: React.FC = () => {
     const handleRemoveSearchKey = (keyword: string): void => {
         if (keyword === `Men's` || keyword === `Women's`) {
             window.open(searchQueryConstructor({ ...search, gender: '' }), '_self')
+        } else if (keyword.includes('USD')) {
+            window.open(searchQueryConstructor({ ...search, minPrice: '', maxPrice: '' }), '_self')
         } else {
             window.open(searchQueryConstructor({ ...search, [_.camelCase(keyword)]: '' }), '_self')
         }
