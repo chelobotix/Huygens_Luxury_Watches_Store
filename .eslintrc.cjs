@@ -24,10 +24,12 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    plugins: ['react'],
+    plugins: ['react', 'react-hooks'],
     ignorePatterns: ['.eslintrc.cjs', 'vite.config.ts'],
     rules: {
         'eslint@typescript-eslint/strict-boolean-expressions': 'off',
         'react/prop-types': 'off',
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
     },
 }

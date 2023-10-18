@@ -1,30 +1,34 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
-import { type Watch } from './watchInterface'
+import { type IWatches } from '../../types/WatchesInterface'
+import { type IBrands } from '../../types/BrandsInterface'
 
-interface WatchState {
-    watches: Watch[]
-    isLoading: boolean
+interface GlobalWatchState {
+    watchesData: IWatches | null
+    brandsData: IBrands | null
+    isLoading: 'idle' | 'loading' | 'succeeded' | 'failed'
     error: string | undefined
 }
 
-const initialState: WatchState = {
-    watches: [],
-    isLoading: true,
+const initialState: GlobalWatchState = {
+    watchesData: null,
+    brandsData: null,
+    isLoading: 'idle',
     error: undefined,
 }
 
 /* ---------------------------------- Fetch --------------------------------- */
-const fetchDataGet = createAsyncThunk('fetchWatchs', async (url: string) => {
-    const response = fetch(url)
-        .then(async (res) => await res.json())
-        .then((data) => {
-            return data
-        })
-        .catch((error) => {
-            console.log(error)
-            throw error
-        })
-    return await response
+// Fetch Watches Data
+const fetchWatchesGet = createAsyncThunk('fetchWatchesGet', async (fetchProps: { url: string; target: string }) => {
+    const { url, target } = fetchProps
+    try {
+        const response = await fetch(url)
+        const json = await response.json()
+        const data = await json
+        return { response: await data, target }
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
 })
 
 /* ---------------------------------- Slice --------------------------------- */
@@ -33,21 +37,31 @@ const WatchSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchDataGet.pending, (state) => {
-            state.isLoading = true
+        builder.addCase(fetchWatchesGet.pending, (state) => {
+            state.isLoading = 'loading'
         })
 
-        builder.addCase(fetchDataGet.fulfilled, (state, action: PayloadAction<Watch[]>) => {
-            state.isLoading = false
-            state.watches = action.payload
+        builder.addCase(fetchWatchesGet.fulfilled, (state, action: PayloadAction<any>) => {
+            switch (action.payload.target) {
+                case 'watches':
+                    state.watchesData = action.payload.response
+                    break
+                case 'brands':
+                    state.brandsData = action.payload.response
+                    break
+                default:
+                    break
+            }
+            state.isLoading = 'succeeded'
+            // state.watchesData = action.payload
         })
 
-        builder.addCase(fetchDataGet.rejected, (state, action) => {
-            state.isLoading = false
+        builder.addCase(fetchWatchesGet.rejected, (state, action) => {
+            state.isLoading = 'failed'
             state.error = action.error.message
         })
     },
 })
 
-export { fetchDataGet, type WatchState }
+export { fetchWatchesGet, type GlobalWatchState }
 export default WatchSlice.reducer
