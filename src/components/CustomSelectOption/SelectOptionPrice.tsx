@@ -47,7 +47,7 @@ const SelectOptionPrice: React.FC = () => {
         )
     }
 
-    const handleChange = (event: Event, newValue: number | number[]): void => {
+    const handleChange = (_event: Event, newValue: number | number[]): void => {
         setRange(newValue as number[])
     }
 
