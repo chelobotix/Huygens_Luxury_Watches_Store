@@ -1,0 +1,6 @@
+.navbarContainer {
+    display: grid;
+    grid-template-columns: 1.5fr 3fr 1.5fr;
+    align-items: center;
+    @apply border-b-2 border-softGray p-3  sm:bg-darkBlue;
+}
