@@ -63,7 +63,7 @@ const NavBar: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <ul>
+            <ul className="hidden sm:flex">
                 <li>
                     <NavLink to="/" className={(navData) => (navData.isActive ? 'active' : '')}>
                         Home
