@@ -5,13 +5,19 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import style from './NavBar.module.css'
 import { InputAdornment } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import { AccountCircle } from '@mui/icons-material'
+import { MenuModal } from '../MenuModal/MenuModal'
+import { useState } from 'react'
 
 const NavBar: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleOpen = (): void => {
+        setIsOpen(true)
+    }
     return (
         <nav>
+            <MenuModal isOpen={isOpen} setIsOpen={setIsOpen} />
             <div className={`${style.navbarContainer}`}>
-                <div className="sm:hidden">
+                <div onClick={handleOpen} className="sm:hidden">
                     <MenuIcon className="text-darkBlue" />
                 </div>
 
@@ -42,11 +48,18 @@ const NavBar: React.FC = () => {
                 </div>
 
                 <div className="flex gap-2 justify-self-end">
-                    <div>
-                        <PersonOutlineIcon className="sm:text-white" style={{ fontSize: 30 }} />
-                    </div>
                     <div className="sm:hidden">
+                        <PersonOutlineIcon className="sm:text-white" style={{ fontSize: 30 }} />
+
                         <SearchIcon className="sm:text-white" style={{ fontSize: 30 }} />
+                    </div>
+                    <div className="hidden gap-3 sm:flex">
+                        <NavLink to="/underConstruction" className="text-white hover:text-softGray">
+                            LOG IN
+                        </NavLink>
+                        <NavLink to="/underConstruction" className="text-white hover:text-softGray">
+                            SIGN UP
+                        </NavLink>
                     </div>
                 </div>
             </div>
