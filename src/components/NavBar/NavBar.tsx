@@ -2,11 +2,11 @@ import { NavLink } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
-import style from './NavBar.module.css'
 import { InputAdornment } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { MenuModal } from '../MenuModal/MenuModal'
 import { useState } from 'react'
+import { NavBarStyled } from './NavBar.styled'
 
 const NavBar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -14,9 +14,9 @@ const NavBar: React.FC = () => {
         setIsOpen(true)
     }
     return (
-        <nav>
+        <NavBarStyled>
             <MenuModal isOpen={isOpen} setIsOpen={setIsOpen} />
-            <div className={`${style.navbarContainer}`}>
+            <div className="navbarContainer">
                 <div onClick={handleOpen} className="sm:hidden">
                     <MenuIcon className="text-darkBlue" />
                 </div>
@@ -91,7 +91,7 @@ const NavBar: React.FC = () => {
                     </NavLink>
                 </li>
             </ul>
-        </nav>
+        </NavBarStyled>
     )
 }
 export { NavBar }

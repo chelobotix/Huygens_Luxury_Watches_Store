@@ -1,6 +1,8 @@
 import { SkeletonLayout } from './components/Skeleton/SkeletonLayout'
 import { useReduxDataFetcher } from './hooks/useReduxDataFetcher'
 import AppRouter from './routers/AppRouter'
+import { ThemeProvider } from 'styled-components'
+import { light } from './themes/light'
 
 const App: React.FC = () => {
     const { isLoading, watchesData, brandsData } = useReduxDataFetcher()
@@ -11,7 +13,14 @@ const App: React.FC = () => {
         return <h2>Fetch Data error</h2>
     }
 
-    return watchesData !== null && brandsData !== null && <AppRouter />
+    return (
+        watchesData !== null &&
+        brandsData !== null && (
+            <ThemeProvider theme={light}>
+                <AppRouter />
+            </ThemeProvider>
+        )
+    )
 }
 
 export default App

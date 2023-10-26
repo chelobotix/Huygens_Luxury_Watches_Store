@@ -14,7 +14,7 @@ const WatchCard: React.FC<{ watch: IWatch }> = ({ watch }) => {
     }
 
     return (
-        <li key={uuidv4()} className="center-col m-2 w-[310px] border-[1px] border-softGray px-2 py-4">
+        <li key={uuidv4()} className="center-col m-2 w-[310px] border-[1px] border-softGray px-2 py-4 text-center">
             <div className="self-end rounded-sm border-[1px] border-black ">
                 <button onClick={handleFavorite} className={`p-2 ${favorite && 'bg-red-100'}`}>
                     <FavoriteBorderIcon />

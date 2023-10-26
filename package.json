@@ -16,7 +16,7 @@
     "@mui/material": "^5.14.11",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/lodash": "^4.14.199",
-    "@types/styled-components": "^5.1.28",
+    "@types/styled-components": "^5.1.29",
     "@types/uuid": "^9.0.3",
     "@uidotdev/usehooks": "^2.3.1",
     "json-server": "^0.17.3",
@@ -27,7 +27,7 @@
     "react-router-dom": "^6.15.0",
     "react-select": "^5.7.5",
     "redux-thunk": "^2.4.2",
-    "styled-components": "^6.0.8",
+    "styled-components": "^6.1.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

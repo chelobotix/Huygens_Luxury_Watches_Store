@@ -1,7 +1,6 @@
 import { Button, Modal, Slide, ThemeProvider } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { NavLink } from 'react-router-dom'
-import { theme } from '../../themes/globalTheme'
 
 interface MenuModalProps {
     isOpen: boolean
@@ -78,14 +77,12 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
                         </li>
                     </ul>
                     <div className="my-9 flex justify-center gap-4 px-1">
-                        <ThemeProvider theme={theme}>
-                            <Button sx={{ width: '100%', maxWidth: '100px' }} color="secondary" variant="contained">
-                                Log in
-                            </Button>
-                            <Button sx={{ width: '100%', maxWidth: '100px' }} color="primary" variant="contained">
-                                Sign Up
-                            </Button>
-                        </ThemeProvider>
+                        <Button sx={{ width: '100%', maxWidth: '100px' }} color="secondary" variant="contained">
+                            Log in
+                        </Button>
+                        <Button sx={{ width: '100%', maxWidth: '100px' }} color="primary" variant="contained">
+                            Sign Up
+                        </Button>
                     </div>
                 </div>
             </Slide>
