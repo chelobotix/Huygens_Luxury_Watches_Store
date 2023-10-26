@@ -16,17 +16,16 @@ const NavBar: React.FC = () => {
     return (
         <NavBarStyled>
             <MenuModal isOpen={isOpen} setIsOpen={setIsOpen} />
-            <div className="navbarContainer">
-                <div onClick={handleOpen} className="sm:hidden">
+
+            <div className="navbarContainer sm:text-md sm:bg-darkBlue">
+                <div onClick={handleOpen} className="ml-1 sm:hidden">
                     <MenuIcon className="text-darkBlue" />
                 </div>
 
-                <div className="center-row gap-2">
+                <div className="center-row ml-1 gap-2">
                     <img src="/images/icons/huyguens.png" alt="" className="w-3/12 max-w-[50px] sm:w-16" />
                     <div className="center-col">
-                        <p className="justify-self-center text-xl font-semibold text-darkBlue sm:text-white md:text-3xl ">
-                            HUYGUENS
-                        </p>
+                        <p className="pTitle text-darkBlue sm:text-white md:text-3xl ">HUYGUENS</p>
                         <p className="text-sm text-slate-400">Luxury Watches</p>
                     </div>
                 </div>
@@ -47,13 +46,13 @@ const NavBar: React.FC = () => {
                     />
                 </div>
 
-                <div className="flex gap-2 justify-self-end">
-                    <div className="sm:hidden">
-                        <PersonOutlineIcon className="sm:text-white" style={{ fontSize: 30 }} />
+                <div className="flex gap-3 justify-self-end">
+                    <div className="mr-1 flex gap-2 sm:hidden">
+                        <PersonOutlineIcon className="sm:text-white" />
 
-                        <SearchIcon className="sm:text-white" style={{ fontSize: 30 }} />
+                        <SearchIcon className="stroke-0 sm:text-white" />
                     </div>
-                    <div className="hidden gap-3 sm:flex">
+                    <div className="mr-5 hidden gap-3 sm:flex">
                         <NavLink to="/underConstruction" className="text-white hover:text-softGray">
                             LOG IN
                         </NavLink>

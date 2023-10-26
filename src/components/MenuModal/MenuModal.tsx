@@ -1,4 +1,4 @@
-import { Button, Modal, Slide, ThemeProvider } from '@mui/material'
+import { Button, Modal, Slide } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import { NavLink } from 'react-router-dom'
 
