@@ -62,31 +62,25 @@ const NavBar: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <ul className="hidden sm:flex">
+            <ul className="linksBar hidden sm:flex">
                 <li>
                     <NavLink to="/" className={(navData) => (navData.isActive ? 'active' : '')}>
-                        Home
+                        HOME
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/brands" className={(navData) => (navData.isActive ? 'active' : '')}>
-                        Brands
+                        BRANDS
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/newarrivals" className={(navData) => (navData.isActive ? 'active' : '')}>
-                        New Arrivals
+                    <NavLink to="/watches/all" className={(navData) => (navData.isActive ? 'active' : '')}>
+                        WATCHES
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/about" className={(navData) => (navData.isActive ? 'active' : '')}>
-                        About
-                    </NavLink>
-                </li>
-
-                <li>
-                    <NavLink to="/watches/all" className={(navData) => (navData.isActive ? 'active' : '')}>
-                        Watches
+                        ABOUT
                     </NavLink>
                 </li>
             </ul>

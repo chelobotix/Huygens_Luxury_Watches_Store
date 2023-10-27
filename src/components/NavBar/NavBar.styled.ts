@@ -14,6 +14,23 @@ const NavBarStyled = styled.nav`
         justify-self: center;
         font-weight: 600;
     }
+
+    .linksBar {
+        border-bottom-width: 1px;
+        border-color: ${(props) => props.theme.colors.softGray};
+        padding: 15px 3px;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 15px;
+        gap: 80px;
+
+        li {
+        }
+    }
+
+    .active {
+        color: ${(props) => props.theme.colors.lightBlue};
+    }
 `
 
 export { NavBarStyled }
