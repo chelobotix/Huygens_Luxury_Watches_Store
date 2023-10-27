@@ -6,6 +6,7 @@ import { type IWatch } from '../../types/WatchInterface'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import style from './WatchCard.module.css'
 import { useState } from 'react'
+import { WatchCardElement } from './WatchCard.styled'
 
 const WatchCard: React.FC<{ watch: IWatch }> = ({ watch }) => {
     const [favorite, setFavorite] = useState(false)
@@ -14,8 +15,8 @@ const WatchCard: React.FC<{ watch: IWatch }> = ({ watch }) => {
     }
 
     return (
-        <li key={uuidv4()} className="center-col m-2 w-[310px] border-[1px] border-softGray px-2 py-4 text-center">
-            <div className="self-end rounded-sm border-[1px] border-black ">
+        <WatchCardElement key={uuidv4()} className="center-col">
+            <div className="favorite">
                 <button onClick={handleFavorite} className={`p-2 ${favorite && 'bg-red-100'}`}>
                     <FavoriteBorderIcon />
                 </button>
@@ -28,12 +29,12 @@ const WatchCard: React.FC<{ watch: IWatch }> = ({ watch }) => {
             ></div>
             <div className="center-col mt-4">
                 <p className="text-lg font-semibold">{watch.brand}</p>
-                <p className="text-center">{watch.name}</p>
+                <p className="w-[290px] truncate">{watch.name}</p>
                 <p className="text-md text-slate-700">
                     {watch.price !== 0 ? `${numberWithCommas(watch.price)} USD` : 'Price upon request'}
                 </p>
             </div>
-        </li>
+        </WatchCardElement>
     )
 }
 export { WatchCard }
