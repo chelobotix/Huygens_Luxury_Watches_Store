@@ -13,5 +13,14 @@ const WatchCardElement = styled.li`
         border-radius: 2px;
         border: 1px solid #000000;
     }
+
+    .blurImage {
+        width: 250px;
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        box-shadow: 0 0 18px 18px white inset;
+    }
 `
 export { WatchCardElement }

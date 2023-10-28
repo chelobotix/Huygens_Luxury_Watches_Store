@@ -4,7 +4,6 @@ import { numberWithCommas } from '../../helpers/numberWithComma'
 import { imgPath } from '../../helpers/imgPath'
 import { type IWatch } from '../../types/WatchInterface'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import style from './WatchCard.module.css'
 import { useState } from 'react'
 import { WatchCardElement } from './WatchCard.styled'
 
@@ -22,7 +21,7 @@ const WatchCard: React.FC<{ watch: IWatch }> = ({ watch }) => {
                 </button>
             </div>
             <div
-                className={`${style.blurImage}`}
+                className="blurImage"
                 style={{
                     backgroundImage: `url(${imgPath(watch.brand, watch.name, watch.images[0])})`,
                 }}
