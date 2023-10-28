@@ -4,6 +4,11 @@ import { BrandsbyAlphabet } from '../../helpers/brandsByAlphabet'
 import { encodeURI } from '../../helpers/encodeURI'
 import { BrandsContainer } from './Brands.styled'
 import { Button } from '@mui/material'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+
+const handleClick = (): void => {
+    window.open('/watches', '_self')
+}
 
 const Brands: React.FC = () => {
     const brandsByAlphabet = BrandsbyAlphabet()
@@ -56,10 +61,17 @@ const Brands: React.FC = () => {
             </div>
             <ul className="flex flex-col">{brandsByLetter()}</ul>
             <section className="center-col gap-2 bg-softYellow p-5">
-                <p className="text-4xl font-semibold tracking-wider">Find Your Watch</p>
-                <p className="text-2xl">Over 150 watch brands&#39; new collections.</p>
-                <p className="text-2xl">Audemars Piguet, Rolex, Patek Philippe and more.</p>
-                <Button>Start your search</Button>
+                <p className="text-center text-4xl font-semibold tracking-wider">Find Your Watch</p>
+                <p className="text-center text-2xl">Over 150 watch brands&#39; new collections.</p>
+                <p className="mb-3 text-center text-2xl">Audemars Piguet, Rolex, Patek Philippe and more.</p>
+                <Button
+                    onClick={handleClick}
+                    variant="contained"
+                    endIcon={<ArrowForwardIcon />}
+                    style={{ backgroundColor: '#000000', color: '#FFFFFF', width: '280px' }}
+                >
+                    Start your search
+                </Button>
             </section>
         </BrandsContainer>
     )
