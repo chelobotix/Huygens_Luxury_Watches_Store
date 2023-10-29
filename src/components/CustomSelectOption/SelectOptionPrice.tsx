@@ -16,7 +16,6 @@ const SelectOptionPrice: React.FC = () => {
         maxPrice = 300000
     }
     const [range, setRange] = useState<number[]>([0, 300000])
-    console.log('🚀 ~ file: SelectOptionPrice.tsx:18 ~ range:', range)
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 

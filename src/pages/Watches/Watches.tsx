@@ -11,17 +11,29 @@ import { editSearch, initialState } from '../../reducers/redux/searchSlice'
 import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { type IWatch } from '../../types/WatchInterface'
 import { filterResult } from './filterResults'
+import _ from 'lodash'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
     const [flag, setFlag] = useState(false)
     const { watchesData, brandsData } = useAppSelector((state) => state.watch)
-    console.log('🚀 ~ file: Watches.tsx:19 ~ brandsData:', brandsData)
     const [result, setResult] = useState<IWatch[] | undefined>(undefined)
     const [searchParams] = useSearchParams()
     const options = UseSelectOptionProcessor(watchesData?.watches)
     const paramObj = readQueryString(searchParams, search, options)
     const dispatch = useAppDispatch()
+
+    const brandDescription = (): string | undefined => {
+        if (search.brand !== '') {
+            console.log(search.brand)
+            const targetBrand = brandsData?.brands.filter((brand) => _.lowerCase(brand.name) === search.brand)
+            if (targetBrand !== undefined) {
+                return targetBrand[0].description
+            }
+        }
+    }
+
+    brandDescription()
 
     useEffect(() => {
         if (flag) {
@@ -38,6 +50,7 @@ const Watches: React.FC = () => {
 
     return (
         <div>
+            {brandDescription()}
             <SearchBar options={options} />
 
             <SearchKeywordsBar />
