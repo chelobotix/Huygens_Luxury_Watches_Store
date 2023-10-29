@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 const BrandsContainer = styled.main`
     margin: 50px auto 0 auto;
-    width: 90%;
+    width: 95%;
     display: flex;
     flex-direction: column;
 
     h2 {
         font-weight: 600;
-        margin-bottom: 10px;
+        margin-bottom: 30px;
     }
 
     .ulLetters {

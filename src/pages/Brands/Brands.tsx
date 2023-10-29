@@ -28,7 +28,7 @@ const Brands: React.FC = () => {
                     if (brandsByAlphabet[letter].length > 0) {
                         return (
                             <li key={uuidv4()}>
-                                <section className="my-20">
+                                <section className="mb-7">
                                     <p id={letter} className="mb-10 ml-2 bg-softYellow p-5 text-3xl">
                                         {letter}
                                     </p>
@@ -53,7 +53,7 @@ const Brands: React.FC = () => {
 
     return (
         <BrandsContainer>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl">Watch Brands A-Z</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl">Watch Brands A-Z</h2>
             <ul className="ulLetters">{alphabetAnchors()}</ul>
             <div className="bannerContainer center-row">
                 <img src="./images/banners/rolex-banner1.webp" alt="patek banner" className="banner" />
