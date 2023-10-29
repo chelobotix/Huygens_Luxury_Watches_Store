@@ -16,7 +16,7 @@ const Brands: React.FC = () => {
     const alphabetAnchors = (): JSX.Element[] => {
         return Object.keys(brandsByAlphabet).map((letter) => (
             <li key={uuidv4()}>
-                <Link to={`#${letter}`}>{letter}</Link>
+                <a href={`#${letter}`}>{letter}</a>
             </li>
         ))
     }

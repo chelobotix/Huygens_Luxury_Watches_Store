@@ -1,3 +1,4 @@
+import CircularProgress from '@mui/material/CircularProgress'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
@@ -10,12 +11,12 @@ import { editSearch, initialState } from '../../reducers/redux/searchSlice'
 import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { type IWatch } from '../../types/WatchInterface'
 import { filterResult } from './filterResults'
-import CircularProgress from '@mui/material/CircularProgress'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
     const [flag, setFlag] = useState(false)
-    const { watchesData } = useAppSelector((state) => state.watch)
+    const { watchesData, brandsData } = useAppSelector((state) => state.watch)
+    console.log('🚀 ~ file: Watches.tsx:19 ~ brandsData:', brandsData)
     const [result, setResult] = useState<IWatch[] | undefined>(undefined)
     const [searchParams] = useSearchParams()
     const options = UseSelectOptionProcessor(watchesData?.watches)
