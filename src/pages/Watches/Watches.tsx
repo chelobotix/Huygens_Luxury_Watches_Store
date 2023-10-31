@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../reducers/redux/store'
 import { type IWatch } from '../../types/WatchInterface'
 import { filterResult } from './filterResults'
 import _ from 'lodash'
+import { type IBrand } from '../../types/BrandInterface'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
@@ -22,13 +23,13 @@ const Watches: React.FC = () => {
     const options = UseSelectOptionProcessor(watchesData?.watches)
     const paramObj = readQueryString(searchParams, search, options)
     const dispatch = useAppDispatch()
+    let selectedBrand: IBrand | undefined
 
-    const brandDescription = (): string | undefined => {
+    const brandDescription = (): void => {
         if (search.brand !== '') {
-            console.log(search.brand)
             const targetBrand = brandsData?.brands.filter((brand) => _.lowerCase(brand.name) === search.brand)
             if (targetBrand !== undefined) {
-                return targetBrand[0].description
+                selectedBrand = targetBrand[0]
             }
         }
     }
@@ -50,7 +51,25 @@ const Watches: React.FC = () => {
 
     return (
         <div>
-            {brandDescription()}
+            {selectedBrand !== undefined ? (
+                <div>
+                    <img src={`./images/banners/${_.camelCase(selectedBrand.name)}-banner2.webp`} alt="" />
+                    <p>{selectedBrand.name}</p>
+                    <p>{selectedBrand.description}</p>
+                </div>
+            ) : (
+                <div>
+                    <img src={`./images/banners/allWatches.webp`} alt="" />
+                    <p>All Watches</p>
+                    <p>
+                        Finding your perfect watch has never been simpler. Huyguens ultimate search features the current
+                        collections of over 150 watch brands with prices, all on one easy-to-use platform. Filter by
+                        brand, price, style, size, materials, colors, functions, and more. We add lots of new watches
+                        every week. Enjoy!
+                    </p>
+                </div>
+            )}
+
             <SearchBar options={options} />
 
             <SearchKeywordsBar />
