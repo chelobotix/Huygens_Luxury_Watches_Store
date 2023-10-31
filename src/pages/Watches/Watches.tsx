@@ -13,10 +13,12 @@ import { type IWatch } from '../../types/WatchInterface'
 import { filterResult } from './filterResults'
 import _ from 'lodash'
 import { type IBrand } from '../../types/BrandInterface'
+import { WatchesStyled } from './Watches.styled'
 
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
     const [flag, setFlag] = useState(false)
+    const [readMore, setReadMore] = useState(false)
     const { watchesData, brandsData } = useAppSelector((state) => state.watch)
     const [result, setResult] = useState<IWatch[] | undefined>(undefined)
     const [searchParams] = useSearchParams()
@@ -50,25 +52,36 @@ const Watches: React.FC = () => {
     }, [flag])
 
     return (
-        <div>
-            {selectedBrand !== undefined ? (
-                <div>
-                    <img src={`./images/banners/${_.camelCase(selectedBrand.name)}-banner2.webp`} alt="" />
-                    <p>{selectedBrand.name}</p>
-                    <p>{selectedBrand.description}</p>
+        <WatchesStyled>
+            <section className="flex gap-10">
+                <div className="w-1/2">
+                    <p className="my-3 text-4xl">{selectedBrand !== undefined ? selectedBrand.name : 'All Watches'}</p>
+                    <div className={`description ${readMore ? 'h-[50px]' : 'h-auto'}`}>
+                        <p>
+                            {selectedBrand !== undefined
+                                ? selectedBrand.description
+                                : 'Finding your perfect watch has never been simpler. Huyguens ultimate search features the current collections of over 150 watch brands with prices, all on one easy-to-use platform. Filter by brand, price, style, size, materials, colors, functions, and more. We add lots of new watches every week. Enjoy!'}
+                        </p>
+                    </div>
+                    <button
+                        onClick={() => {
+                            setReadMore(!readMore)
+                        }}
+                        className="text-lightBlue underline"
+                    >
+                        {readMore ? 'Read more...' : 'Read less.'}
+                    </button>
                 </div>
-            ) : (
-                <div>
-                    <img src={`./images/banners/allWatches.webp`} alt="" />
-                    <p>All Watches</p>
-                    <p>
-                        Finding your perfect watch has never been simpler. Huyguens ultimate search features the current
-                        collections of over 150 watch brands with prices, all on one easy-to-use platform. Filter by
-                        brand, price, style, size, materials, colors, functions, and more. We add lots of new watches
-                        every week. Enjoy!
-                    </p>
-                </div>
-            )}
+                <img
+                    src={`${
+                        selectedBrand !== undefined
+                            ? `/images/banners/${_.camelCase(selectedBrand.name)}-banner2.webp`
+                            : '/images/banners/allWatches.webp'
+                    }`}
+                    alt="Brand Banner"
+                    className="h-[300px] w-1/2 object-cover"
+                />
+            </section>
 
             <SearchBar options={options} />
 
@@ -83,7 +96,7 @@ const Watches: React.FC = () => {
             ) : (
                 <CircularProgress />
             )}
-        </div>
+        </WatchesStyled>
     )
 }
 export { Watches }
