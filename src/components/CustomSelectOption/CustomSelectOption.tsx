@@ -12,12 +12,23 @@ import { type ISearch } from '../../types/SearchInterface'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
 import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
+import { styled } from '@mui/material/styles'
 
 interface CustomSelectOptionProps {
     title: string
     items: string[]
     isMulti: boolean
 }
+
+const StyledBox = styled('div')(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        backgroundColor: '#ffffff',
+        width: '70%',
+    },
+    [theme.breakpoints.up('sm')]: {
+        backgroundColor: theme.palette.secondary.main,
+    },
+}))
 
 const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti }) => {
     const search = useAppSelector((state) => state.search)
@@ -71,17 +82,21 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
 
     return (
         <StyledContainer>
-            <div ref={ref} className="divAbsolute">
-                <Badge badgeContent={badgeCounter} color="primary" invisible={!isMulti}>
-                    <Button
-                        onClick={handleClickButton}
-                        variant="outlined"
-                        endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                        style={{ textTransform: 'none' }}
-                    >
-                        {_.startCase(title)}
-                    </Button>
-                </Badge>
+            <div ref={ref} className="searchContainer center-col py-3">
+                <StyledBox>
+                    <Badge badgeContent={badgeCounter} color="primary" invisible={!isMulti} sx={{ width: '100%' }}>
+                        <Button
+                            size="large"
+                            fullWidth
+                            color="primary"
+                            onClick={handleClickButton}
+                            variant="text"
+                            endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        >
+                            {_.startCase(title)}
+                        </Button>
+                    </Badge>
+                </StyledBox>
 
                 <Fade in={isOpen}>
                     <ul className={isOpen ? 'visible' : 'invisible'}>
@@ -97,8 +112,8 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                             </li>
                         ))}
                         {isMulti && (
-                            <div>
-                                <Button onClick={handleClear} variant="contained">
+                            <div className="buttonsContainer">
+                                <Button onClick={handleClear} variant="contained" color="secondary">
                                     Clear
                                 </Button>
                                 <Button onClick={handleSave} variant="contained" disabled={selectedItems.length === 0}>

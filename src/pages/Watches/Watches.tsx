@@ -18,7 +18,7 @@ import { WatchesStyled } from './Watches.styled'
 const Watches: React.FC = () => {
     const search = useAppSelector((state) => state.search)
     const [flag, setFlag] = useState(false)
-    const [readMore, setReadMore] = useState(false)
+    const [readMore, setReadMore] = useState(true)
     const { watchesData, brandsData } = useAppSelector((state) => state.watch)
     const [result, setResult] = useState<IWatch[] | undefined>(undefined)
     const [searchParams] = useSearchParams()
@@ -53,10 +53,12 @@ const Watches: React.FC = () => {
 
     return (
         <WatchesStyled>
-            <section className="flex gap-10">
+            <section>
                 <div className="w-1/2">
-                    <p className="my-3 text-4xl">{selectedBrand !== undefined ? selectedBrand.name : 'All Watches'}</p>
-                    <div className={`description ${readMore ? 'h-[50px]' : 'h-auto'}`}>
+                    <p className="my-3 text-2xl sm:text-4xl">
+                        {selectedBrand !== undefined ? selectedBrand.name : 'All Watches'}
+                    </p>
+                    <div className={`description ${readMore ? 'h-[100px] sm:h-[50px]' : 'h-auto'}`}>
                         <p>
                             {selectedBrand !== undefined
                                 ? selectedBrand.description
@@ -79,7 +81,7 @@ const Watches: React.FC = () => {
                             : '/images/banners/allWatches.webp'
                     }`}
                     alt="Brand Banner"
-                    className="h-[300px] w-1/2 object-cover"
+                    className="h-[200px] w-1/2 object-cover sm:h-[300px]"
                 />
             </section>
 

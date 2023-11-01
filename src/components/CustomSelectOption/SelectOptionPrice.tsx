@@ -7,6 +7,17 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
 import { useAppSelector } from '../../reducers/redux/store'
+import { styled } from '@mui/material/styles'
+
+const StyledBox = styled('div')(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        backgroundColor: '#ffffff',
+        width: '90%',
+    },
+    [theme.breakpoints.up('sm')]: {
+        backgroundColor: theme.palette.secondary.main,
+    },
+}))
 
 const SelectOptionPrice: React.FC = () => {
     const search = useAppSelector((state) => state.search)
@@ -53,16 +64,22 @@ const SelectOptionPrice: React.FC = () => {
     return (
         <StyledContainer>
             <div ref={ref} className="divAbsolute">
-                <Button
-                    onClick={handleClickButton}
-                    variant="outlined"
-                    endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    style={{ textTransform: 'none' }}
-                >
-                    Price
-                </Button>
+                <div ref={ref} className="searchContainer center-col py-3">
+                    <StyledBox>
+                        <Button
+                            fullWidth
+                            size="large"
+                            onClick={handleClickButton}
+                            variant="text"
+                            endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                            style={{ border: 'none' }}
+                        >
+                            Price
+                        </Button>
+                    </StyledBox>
+                </div>
                 <Fade in={isOpen}>
-                    <div className={isOpen ? 'visible' : 'invisible'}>
+                    <div className={`priceSearch ${isOpen ? 'visible' : 'invisible'}`}>
                         <Slider
                             value={range}
                             min={0}
@@ -71,17 +88,17 @@ const SelectOptionPrice: React.FC = () => {
                             onChange={handleChange}
                             valueLabelDisplay="auto"
                         />
-                        <div>
+                        <div className="minMax">
                             <div>
-                                <p>Min price</p>
-                                <div>
+                                <p className="priceTitle">Min price</p>
+                                <div className="amountContainer">
                                     <p>{range[0].toLocaleString()}</p>
                                     <p>USD</p>
                                 </div>
                             </div>
                             <div>
-                                <p>Max price</p>
-                                <div>
+                                <p className="priceTitle">Max price</p>
+                                <div className="amountContainer">
                                     <p>
                                         {range[1] === 300000
                                             ? `${range[1].toLocaleString()}+`
@@ -91,8 +108,8 @@ const SelectOptionPrice: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <Button onClick={handleClear} variant="contained">
+                        <div className="buttonsContainer">
+                            <Button onClick={handleClear} variant="contained" color="secondary">
                                 Clear
                             </Button>
                             <Button onClick={handleSave} variant="contained">

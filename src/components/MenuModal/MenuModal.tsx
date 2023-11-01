@@ -80,7 +80,11 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
                         <Button sx={{ width: '100%', maxWidth: '100px' }} color="secondary" variant="contained">
                             Log in
                         </Button>
-                        <Button sx={{ width: '100%', maxWidth: '100px' }} color="primary" variant="contained">
+                        <Button
+                            sx={{ width: '100%', maxWidth: '100px', backgroundColor: 'primary.light' }}
+                            color="primary"
+                            variant="contained"
+                        >
                             Sign Up
                         </Button>
                     </div>
