@@ -58,7 +58,7 @@ const SelectOptionPrice: React.FC = () => {
     return (
         <StyledContainer>
             <div ref={ref}>
-                <div ref={ref} className={`searchContainer center-col ${clickStyle ? 'clicked' : 'unclicked'}`}>
+                <div ref={ref} className={`center-col ${clickStyle ? 'clicked' : 'unclicked'}`}>
                     <Button
                         fullWidth
                         disableElevation
@@ -72,6 +72,7 @@ const SelectOptionPrice: React.FC = () => {
                 </div>
                 <Fade in={isOpen}>
                     <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>
+                        <hr className={isSmallScreen ? '' : 'hrTop'} />
                         <div className={isSmallScreen ? '' : 'priceContainer'}>
                             <Slider
                                 value={range}

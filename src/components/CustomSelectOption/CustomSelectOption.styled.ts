@@ -11,7 +11,7 @@ const StyledContainer = styled.div`
         height: 0.5px;
         background-color: black;
         border: 1px solid #000000;
-        width: calc(50%); /* Calculate the width */
+        width: calc(50%);
         position: absolute;
         top: 0;
         left: calc(50% + 2px);
@@ -120,14 +120,34 @@ const StyledContainer = styled.div`
         }
 
         .priceSearch {
-            background-color: #000000;
             position: relative;
             z-index: 10;
+            width: calc(100% * 3);
         }
 
         .priceContainer {
+            border-left: 2px solid #000000;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
             position: absolute;
             background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .hrTop {
+            height: 0.5px;
+            background-color: black;
+            border: 1px solid #000000;
+            width: calc(67%);
+            position: absolute;
+            top: -2px;
+            left: calc(32% + 2px);
         }
     }
 `
