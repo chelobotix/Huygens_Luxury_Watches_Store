@@ -6,10 +6,17 @@ const WatchesStyled = styled.main`
     flex-direction: column;
     align-items: center;
 
+    .watchesContainer {
+        max-width: 1440px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     section {
         display: flex;
         justify-content: center;
-        width: 90%;
+        width: 100%;
         gap: 15px;
     }
 

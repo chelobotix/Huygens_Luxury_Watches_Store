@@ -94,6 +94,7 @@ const StyledContainer = styled.div`
 
         .unclicked {
             border: 1px solid #000000;
+            padding-bottom: 0;
         }
 
         .searchContainer {

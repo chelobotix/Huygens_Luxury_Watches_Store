@@ -37,6 +37,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     }
 
     const ref: any = useClickAway(() => {
+        setClickStyle(false)
         setIsOpen(false)
     })
 

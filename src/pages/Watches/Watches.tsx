@@ -53,52 +53,54 @@ const Watches: React.FC = () => {
 
     return (
         <WatchesStyled>
-            <section>
-                <div>
-                    <p className="my-3 text-2xl sm:text-4xl">
-                        {selectedBrand !== undefined ? selectedBrand.name : 'All Watches'}
-                    </p>
-                    <div className={`description ${readMore ? 'h-[100px] sm:h-[50px]' : 'h-auto'}`}>
-                        <p>
-                            {selectedBrand !== undefined
-                                ? selectedBrand.description
-                                : 'Finding your perfect watch has never been simpler. Huyguens ultimate search features the current collections of over 150 watch brands with prices, all on one easy-to-use platform. Filter by brand, price, style, size, materials, colors, functions, and more. We add lots of new watches every week. Enjoy!'}
+            <div className="watchesContainer">
+                <section>
+                    <div className="w-1/2">
+                        <p className="my-3 text-2xl sm:text-4xl">
+                            {selectedBrand !== undefined ? selectedBrand.name : 'All Watches'}
                         </p>
+                        <div className={`description ${readMore ? 'h-[100px] sm:h-[50px]' : 'h-auto'}`}>
+                            <p>
+                                {selectedBrand !== undefined
+                                    ? selectedBrand.description
+                                    : 'Finding your perfect watch has never been simpler. Huyguens ultimate search features the current collections of over 150 watch brands with prices, all on one easy-to-use platform. Filter by brand, price, style, size, materials, colors, functions, and more. We add lots of new watches every week. Enjoy!'}
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => {
+                                setReadMore(!readMore)
+                            }}
+                            className="text-lightBlue underline"
+                        >
+                            {readMore ? 'Read more...' : 'Read less.'}
+                        </button>
                     </div>
-                    <button
-                        onClick={() => {
-                            setReadMore(!readMore)
-                        }}
-                        className="text-lightBlue underline"
-                    >
-                        {readMore ? 'Read more...' : 'Read less.'}
-                    </button>
-                </div>
-                <img
-                    src={`${
-                        selectedBrand !== undefined
-                            ? `/images/banners/${_.camelCase(selectedBrand.name)}-banner2.webp`
-                            : '/images/banners/allWatches.webp'
-                    }`}
-                    alt="Brand Banner"
-                    className="h-[200px] w-1/2 object-cover sm:h-[300px]"
-                />
-            </section>
+                    <img
+                        src={`${
+                            selectedBrand !== undefined
+                                ? `/images/banners/${_.camelCase(selectedBrand.name)}-banner2.webp`
+                                : '/images/banners/allWatches.webp'
+                        }`}
+                        alt="Brand Banner"
+                        className="h-[200px] w-1/2 object-cover sm:h-[300px]"
+                    />
+                </section>
 
-            <SearchBar options={options} />
+                <SearchBar options={options} />
 
-            <SearchKeywordsBar />
-            <ul className="ulWatchCard">
-                {flag ? (
-                    result !== undefined && result.length > 0 ? (
-                        result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
+                <SearchKeywordsBar />
+                <ul className="ulWatchCard">
+                    {flag ? (
+                        result !== undefined && result.length > 0 ? (
+                            result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
+                        ) : (
+                            <h2>Nothing Found</h2>
+                        )
                     ) : (
-                        <h2>Nothing Found</h2>
-                    )
-                ) : (
-                    <CircularProgress />
-                )}
-            </ul>
+                        <CircularProgress />
+                    )}
+                </ul>
+            </div>
         </WatchesStyled>
     )
 }
