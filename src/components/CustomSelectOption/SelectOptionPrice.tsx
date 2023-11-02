@@ -58,10 +58,7 @@ const SelectOptionPrice: React.FC = () => {
     return (
         <StyledContainer>
             <div ref={ref}>
-                <div
-                    ref={ref}
-                    className={`searchContainer center-col sm:relative ${clickStyle ? 'clicked' : 'unclicked'}`}
-                >
+                <div ref={ref} className={`searchContainer center-col ${clickStyle ? 'clicked' : 'unclicked'}`}>
                     <Button
                         fullWidth
                         disableElevation
@@ -75,41 +72,43 @@ const SelectOptionPrice: React.FC = () => {
                 </div>
                 <Fade in={isOpen}>
                     <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>
-                        <Slider
-                            value={range}
-                            min={0}
-                            max={300000}
-                            step={1000}
-                            onChange={handleChange}
-                            valueLabelDisplay="auto"
-                        />
-                        <div className="minMax">
-                            <div>
-                                <p className="priceTitle">Min price</p>
-                                <div className="amountContainer">
-                                    <p>{range[0].toLocaleString()}</p>
-                                    <p>USD</p>
+                        <div className={isSmallScreen ? '' : 'priceContainer'}>
+                            <Slider
+                                value={range}
+                                min={0}
+                                max={300000}
+                                step={1000}
+                                onChange={handleChange}
+                                valueLabelDisplay="auto"
+                            />
+                            <div className="minMax">
+                                <div>
+                                    <p className="priceTitle">Min price</p>
+                                    <div className="amountContainer">
+                                        <p>{range[0].toLocaleString()}</p>
+                                        <p>USD</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className="priceTitle">Max price</p>
+                                    <div className="amountContainer">
+                                        <p>
+                                            {range[1] === 300000
+                                                ? `${range[1].toLocaleString()}+`
+                                                : range[1].toLocaleString()}
+                                        </p>
+                                        <p>USD</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <p className="priceTitle">Max price</p>
-                                <div className="amountContainer">
-                                    <p>
-                                        {range[1] === 300000
-                                            ? `${range[1].toLocaleString()}+`
-                                            : range[1].toLocaleString()}
-                                    </p>
-                                    <p>USD</p>
-                                </div>
+                            <div className="buttonsContainer">
+                                <Button onClick={handleClear} variant="contained" color="secondary">
+                                    Clear
+                                </Button>
+                                <Button onClick={handleSave} variant="contained">
+                                    Save
+                                </Button>
                             </div>
-                        </div>
-                        <div className="buttonsContainer">
-                            <Button onClick={handleClear} variant="contained" color="secondary">
-                                Clear
-                            </Button>
-                            <Button onClick={handleSave} variant="contained">
-                                Save
-                            </Button>
                         </div>
                     </div>
                 </Fade>

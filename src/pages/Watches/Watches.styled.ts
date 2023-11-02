@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const WatchesStyled = styled.main`
-    margin: 10px 10px;
+    margin: 0 10px 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;

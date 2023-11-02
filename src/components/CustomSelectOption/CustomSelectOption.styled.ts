@@ -118,6 +118,17 @@ const StyledContainer = styled.div`
                 }
             }
         }
+
+        .priceSearch {
+            background-color: #000000;
+            position: relative;
+            z-index: 10;
+        }
+
+        .priceContainer {
+            position: absolute;
+            background-color: #ffffff;
+        }
     }
 `
 
