@@ -10,12 +10,7 @@ const WatchesStyled = styled.main`
         display: flex;
         justify-content: center;
         width: 90%;
-    }
-
-    button {
-        color: ${(props) => props.theme.colors.lightBlue};
-        text-decoration: underline;
-        padding: 5px 0;
+        gap: 15px;
     }
 
     .description {

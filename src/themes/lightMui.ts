@@ -12,6 +12,9 @@ const lightMui = createTheme({
         info: {
             main: '#CF2C5C',
         },
+        warning: {
+            main: '#ffffff',
+        },
     },
     typography: {
         fontFamily: ['Playfair Display', 'serif'].join(','),

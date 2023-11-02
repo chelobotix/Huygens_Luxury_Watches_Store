@@ -54,7 +54,7 @@ const Watches: React.FC = () => {
     return (
         <WatchesStyled>
             <section>
-                <div className="w-1/2">
+                <div>
                     <p className="my-3 text-2xl sm:text-4xl">
                         {selectedBrand !== undefined ? selectedBrand.name : 'All Watches'}
                     </p>
@@ -88,16 +88,17 @@ const Watches: React.FC = () => {
             <SearchBar options={options} />
 
             <SearchKeywordsBar />
-
-            {flag ? (
-                result !== undefined && result.length > 0 ? (
-                    result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
+            <ul className="ulWatchCard">
+                {flag ? (
+                    result !== undefined && result.length > 0 ? (
+                        result?.map((watch) => <WatchCard key={uuidv4()} watch={watch} />)
+                    ) : (
+                        <h2>Nothing Found</h2>
+                    )
                 ) : (
-                    <h2>Nothing Found</h2>
-                )
-            ) : (
-                <CircularProgress />
-            )}
+                    <CircularProgress />
+                )}
+            </ul>
         </WatchesStyled>
     )
 }

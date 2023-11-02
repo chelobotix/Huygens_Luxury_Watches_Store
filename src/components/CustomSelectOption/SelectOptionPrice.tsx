@@ -2,25 +2,18 @@ import Slider from '@mui/material/Slider'
 import { useEffect, useState } from 'react'
 import { StyledContainer } from './CustomSelectOption.styled'
 import { useClickAway } from '@uidotdev/usehooks'
-import { Button, Fade } from '@mui/material'
+import { Button, Fade, useMediaQuery } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
 import { useAppSelector } from '../../reducers/redux/store'
-import { styled } from '@mui/material/styles'
-
-const StyledBox = styled('div')(({ theme }) => ({
-    [theme.breakpoints.down('sm')]: {
-        backgroundColor: '#ffffff',
-        width: '90%',
-    },
-    [theme.breakpoints.up('sm')]: {
-        backgroundColor: theme.palette.secondary.main,
-    },
-}))
+import { createTheme } from '@mui/material/styles'
 
 const SelectOptionPrice: React.FC = () => {
     const search = useAppSelector((state) => state.search)
+    const theme = createTheme()
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
+    const [clickStyle, setClickStyle] = useState(false)
 
     let maxPrice = parseInt(search.maxPrice)
     if (parseInt(search.maxPrice) >= 300000) {
@@ -44,6 +37,7 @@ const SelectOptionPrice: React.FC = () => {
 
     const handleClickButton = (): void => {
         setIsOpen((prev) => !prev)
+        setClickStyle(!clickStyle)
     }
 
     const handleClear = (): void => {
@@ -63,23 +57,24 @@ const SelectOptionPrice: React.FC = () => {
 
     return (
         <StyledContainer>
-            <div ref={ref} className="divAbsolute">
-                <div ref={ref} className="searchContainer center-col py-3">
-                    <StyledBox>
-                        <Button
-                            fullWidth
-                            size="large"
-                            onClick={handleClickButton}
-                            variant="text"
-                            endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                            style={{ border: 'none' }}
-                        >
-                            Price
-                        </Button>
-                    </StyledBox>
+            <div ref={ref}>
+                <div
+                    ref={ref}
+                    className={`searchContainer center-col sm:relative ${clickStyle ? 'clicked' : 'unclicked'}`}
+                >
+                    <Button
+                        fullWidth
+                        disableElevation
+                        onClick={handleClickButton}
+                        variant={isSmallScreen ? 'text' : 'contained'}
+                        color={isSmallScreen ? 'primary' : 'warning'}
+                        endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    >
+                        Price
+                    </Button>
                 </div>
                 <Fade in={isOpen}>
-                    <div className={`priceSearch ${isOpen ? 'visible' : 'invisible'}`}>
+                    <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>
                         <Slider
                             value={range}
                             min={0}

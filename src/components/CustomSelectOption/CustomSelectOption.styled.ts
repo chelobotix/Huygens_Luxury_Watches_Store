@@ -1,28 +1,34 @@
 import styled from 'styled-components'
 
 const StyledContainer = styled.div`
-    border-bottom: solid 1px black;
     width: auto;
-    position: relative;
     display: inline-flex;
     flex-direction: column;
     height: auto;
+    border-bottom: 1px solid #000000;
+
+    hr {
+        height: 0.5px;
+        background-color: black;
+        border: 1px solid #000000;
+        width: calc(50%); /* Calculate the width */
+        position: absolute;
+        top: 0;
+        left: calc(50% + 2px);
+    }
 
     .searchContainer {
-        p {
-            margin: 0;
-        }
-
         ul {
             flex-direction: column;
             list-style-type: none;
-            padding: 0;
+            background-color: #ffffff;
+            z-index: 10;
+            min-width: 100%;
 
             li {
-                display: flex;
-                justify-content: center;
                 border: none;
-                padding: 5px 2px;
+                white-space: nowrap;
+                padding: 5px;
                 font-size: 16px;
 
                 &:hover {
@@ -31,14 +37,9 @@ const StyledContainer = styled.div`
                 }
             }
         }
-
-        p {
-            color: green;
-        }
     }
 
     .priceSearch {
-        display: flex;
         flex-direction: column;
         padding: 0 20px;
         gap: 10px;
@@ -80,15 +81,43 @@ const StyledContainer = styled.div`
         font-weight: bold;
     }
 
-    .visible {
-        display: flex;
-    }
-
-    .invisible {
-        display: none;
-    }
-
     @media (min-width: 640px) {
+        border: none;
+        .clicked {
+            border-top: 2px solid #000000;
+            border-left: 2px solid #000000;
+            border-right: 2px solid #000000;
+            border-bottom: none;
+            padding-bottom: 10px;
+            background-color: #ffffff;
+        }
+
+        .unclicked {
+            border: 1px solid #000000;
+        }
+
+        .searchContainer {
+            ul {
+                border-top: none;
+                border-left: 2px solid #000000;
+                border-right: 2px solid #000000;
+                border-bottom: 2px solid #000000;
+                padding: 0;
+                position: absolute;
+                top: 46px;
+                left: -2px;
+                width: calc(100% + 100%);
+
+                li {
+                    width: 100%;
+                    border-bottom: 1px solid #000000;
+
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
     }
 `
 

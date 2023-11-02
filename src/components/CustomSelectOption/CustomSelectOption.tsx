@@ -1,6 +1,6 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { Badge, Button } from '@mui/material'
+import { Badge, Button, useMediaQuery } from '@mui/material'
 import Fade from '@mui/material/Fade'
 import { useClickAway } from '@uidotdev/usehooks'
 import _ from 'lodash'
@@ -12,7 +12,7 @@ import { type ISearch } from '../../types/SearchInterface'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
 import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
-import { styled } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles'
 
 interface CustomSelectOptionProps {
     title: string
@@ -20,24 +20,20 @@ interface CustomSelectOptionProps {
     isMulti: boolean
 }
 
-const StyledBox = styled('div')(({ theme }) => ({
-    [theme.breakpoints.down('sm')]: {
-        backgroundColor: '#ffffff',
-        width: '70%',
-    },
-    [theme.breakpoints.up('sm')]: {
-        backgroundColor: theme.palette.secondary.main,
-    },
-}))
-
 const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, isMulti }) => {
     const search = useAppSelector((state) => state.search)
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
+    const [clickStyle, setClickStyle] = useState(false)
+
+    // Mui Material
+    const theme = createTheme()
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
     const handleClickButton = (): void => {
         setIsOpen((prev) => !prev)
+        setClickStyle(!clickStyle)
     }
 
     const ref: any = useClickAway(() => {
@@ -82,46 +78,51 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
 
     return (
         <StyledContainer>
-            <div ref={ref} className="searchContainer center-col py-3">
-                <StyledBox>
-                    <Badge badgeContent={badgeCounter} color="primary" invisible={!isMulti} sx={{ width: '100%' }}>
-                        <Button
-                            size="large"
-                            fullWidth
-                            color="primary"
-                            onClick={handleClickButton}
-                            variant="text"
-                            endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                        >
-                            {_.startCase(title)}
-                        </Button>
-                    </Badge>
-                </StyledBox>
+            <div ref={ref} className={`searchContainer center-col sm:relative ${clickStyle ? 'clicked' : 'unclicked'}`}>
+                <Badge badgeContent={badgeCounter} color="primary" invisible={!isMulti} sx={{ width: '100%' }}>
+                    <Button
+                        fullWidth
+                        disableElevation
+                        onClick={handleClickButton}
+                        variant={isSmallScreen ? 'text' : 'contained'}
+                        color={isSmallScreen ? 'primary' : 'warning'}
+                        endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    >
+                        {_.startCase(title)}
+                    </Button>
+                </Badge>
 
                 <Fade in={isOpen}>
-                    <ul className={isOpen ? 'visible' : 'invisible'}>
-                        {items.map((item) => (
-                            <li
-                                onClick={() => {
-                                    handleClickItem(item)
-                                }}
-                                key={uuidv4()}
-                                className={selectedItems.includes(_.lowerCase(item)) ? 'selected' : ''}
-                            >
-                                {_.startCase(item)}
-                            </li>
-                        ))}
-                        {isMulti && (
-                            <div className="buttonsContainer">
-                                <Button onClick={handleClear} variant="contained" color="secondary">
-                                    Clear
-                                </Button>
-                                <Button onClick={handleSave} variant="contained" disabled={selectedItems.length === 0}>
-                                    Save
-                                </Button>
-                            </div>
-                        )}
-                    </ul>
+                    <div>
+                        <ul className={`${isOpen ? 'flex' : 'hidden'}`}>
+                            <hr />
+                            {items.map((item) => (
+                                <li
+                                    onClick={() => {
+                                        handleClickItem(item)
+                                    }}
+                                    key={uuidv4()}
+                                    className={selectedItems.includes(_.lowerCase(item)) ? 'selected' : ''}
+                                >
+                                    {_.startCase(item)}
+                                </li>
+                            ))}
+                            {isMulti && (
+                                <div className="buttonsContainer">
+                                    <Button onClick={handleClear} variant="contained" color="secondary">
+                                        Clear
+                                    </Button>
+                                    <Button
+                                        onClick={handleSave}
+                                        variant="contained"
+                                        disabled={selectedItems.length === 0}
+                                    >
+                                        Save
+                                    </Button>
+                                </div>
+                            )}
+                        </ul>
+                    </div>
                 </Fade>
             </div>
         </StyledContainer>
