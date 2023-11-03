@@ -3,17 +3,23 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
 interface ButtonStartYourSearchProps {
     backgroundColor: string
-    handleClick: () => void
     color: string
+    width: string
+    handleClick: () => void
 }
 
-const ButtonStartYourSearch: React.FC<ButtonStartYourSearchProps> = ({ backgroundColor, color, handleClick }) => {
+const ButtonStartYourSearch: React.FC<ButtonStartYourSearchProps> = ({
+    backgroundColor,
+    color,
+    width,
+    handleClick,
+}) => {
     return (
         <Button
             onClick={handleClick}
             variant="contained"
             endIcon={<ArrowForwardIcon />}
-            style={{ backgroundColor, color, width: '280px' }}
+            style={{ backgroundColor, color, width }}
         >
             Start your search
         </Button>

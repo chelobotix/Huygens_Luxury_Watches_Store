@@ -64,7 +64,12 @@ const Brands: React.FC = () => {
                 <p className="text-center text-2xl">Over 150 watch brands&#39; new collections.</p>
                 <p className="mb-3 text-center text-2xl">Audemars Piguet, Rolex, Patek Philippe and more.</p>
 
-                <ButtonStartYourSearch backgroundColor="#000000" color="#ffffff" handleClick={handleClick} />
+                <ButtonStartYourSearch
+                    backgroundColor="#000000"
+                    color="#ffffff"
+                    width="280px"
+                    handleClick={handleClick}
+                />
             </section>
         </BrandsContainer>
     )

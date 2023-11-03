@@ -27,7 +27,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
     const [clickStyle, setClickStyle] = useState(false)
 
-    // Mui Material
+    // Detect screen size
     const theme = createTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 const MainHeadingStyled = styled.section`
+    display: flex;
     height: 250px;
     background-image: url('images/banners/heading1.jpg');
     background-repeat: no-repeat;
@@ -8,7 +9,16 @@ const MainHeadingStyled = styled.section`
     background-size: cover;
 
     @media (min-width: 640px) {
-        height: 100vh;
+        height: 65vh;
+        align-items: center;
+        padding-left: 15px;
+        margin: 0px 20px;
+    }
+
+    @media (min-width: 768px) {
+        height: 90vh;
+        align-items: center;
+        margin: 0px 20px;
     }
 `
 

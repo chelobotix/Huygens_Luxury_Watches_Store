@@ -1,14 +1,28 @@
 import { ButtonStartYourSearch } from '../ButtonStartYourSearch/ButtonStartYourSearch'
+import { HeadingContentS } from './HeadingContent.styled'
 
-const HeadingContent: React.FC = () => {
+interface HeadingContentProps {
+    width: string
+    backgroundColor: string
+    color: string
+}
+
+const HeadingContent: React.FC<HeadingContentProps> = ({ backgroundColor, width, color }) => {
     const handleClick = (): void => {
         window.open('/watches', '_self')
     }
     return (
-        <div>
-            <h1>Explore over 150 watch brands&apos; new collections.</h1>
-            <ButtonStartYourSearch backgroundColor="#ffffff" color="#000000" handleClick={handleClick} />
-        </div>
+        <HeadingContentS>
+            <h1 className="text-2xl text-black  shadow-cyan-400 drop-shadow-2xl sm:text-white">
+                Explore over 150 watch brands&apos; new collections.
+            </h1>
+            <ButtonStartYourSearch
+                backgroundColor={backgroundColor}
+                color={color}
+                width={width}
+                handleClick={handleClick}
+            />
+        </HeadingContentS>
     )
 }
 export { HeadingContent }
