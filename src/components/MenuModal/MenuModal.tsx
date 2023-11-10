@@ -1,6 +1,6 @@
 import { Button, Modal, Slide } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 interface MenuModalProps {
     isOpen: boolean
@@ -23,11 +23,13 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
                 <div className="h-screen  w-3/4 bg-white">
                     <div className="flex items-start justify-between">
                         <div className="center-col h-[50px] w-4/5 border-b-[1px] border-softGray">
-                            <p className="justify-self-center text-xl font-semibold text-darkBlue">HUYGUENS</p>
-                            <p className="text-sm text-slate-400">Luxury Watches</p>
+                            <Link to="/home">
+                                <p className="justify-self-center text-xl font-semibold text-darkBlue">HUYGUENS</p>
+                                <p className="text-sm text-slate-400">Luxury Watches</p>
+                            </Link>
                         </div>
                         <div className="h-[50px] w-1/5 border-[1px] border-softGray text-right">
-                            <button onClick={handleClose}>
+                            <button className="pr-2" onClick={handleClose}>
                                 <CloseIcon className="text-darkBlue" />
                             </button>
                         </div>

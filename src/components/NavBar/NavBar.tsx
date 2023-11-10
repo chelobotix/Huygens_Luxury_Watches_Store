@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
@@ -21,14 +21,14 @@ const NavBar: React.FC = () => {
                 <div onClick={handleOpen} className="ml-1 sm:hidden">
                     <MenuIcon className="text-darkBlue" />
                 </div>
-
-                <div className="center-row ml-1 gap-2">
-                    <img src="/images/icons/huyguensMobile.png" alt="" className="w-3/12 max-w-[50px] sm:w-16" />
-                    <div className="center-col">
-                        <p className="pTitle text-darkBlue sm:text-white md:text-3xl ">HUYGUENS</p>
-                        <p className="text-sm text-slate-400">Luxury Watches</p>
+                <Link to="/home">
+                    <div className="center-row ml-1 gap-2">
+                        <div className="center-col">
+                            <p className="pTitle text-3xl text-darkBlue sm:text-white lg:text-4xl ">HUYGUENS</p>
+                            <p className="text-sm text-slate-400">Luxury Watches</p>
+                        </div>
                     </div>
-                </div>
+                </Link>
 
                 <div className="hidden w-full justify-center sm:flex">
                     <TextField
