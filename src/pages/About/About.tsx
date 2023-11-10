@@ -18,7 +18,7 @@ const About: React.FC = () => {
                     <br />
                     <span className="underline">Currently open to new professional opportunities.</span>
                     <br />
-                    <span className="text-darkBlue">
+                    <span className="text-darkBlue underline">
                         Whatsapp: +59174021543
                         <br />
                         <a href="mailto:marceloalarconbarrenechea@gmail.com">marceloalarconbarrenechea@gmail.com</a>
