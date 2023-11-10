@@ -8,6 +8,7 @@ const NavBarStyled = styled.nav`
         display: grid;
         grid-template-columns: 1.5fr 3fr 1.5fr;
         padding: 3px;
+        height: 80px;
     }
 
     .pTitle {

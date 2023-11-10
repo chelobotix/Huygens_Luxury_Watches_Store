@@ -23,9 +23,8 @@ const NavBar: React.FC = () => {
                 </div>
 
                 <div className="center-row ml-1 gap-2">
-                    <img src="/images/icons/huyguensMobile.png" alt="" className="w-3/12 max-w-[50px] sm:w-16" />
                     <div className="center-col">
-                        <p className="pTitle text-darkBlue sm:text-white md:text-3xl ">HUYGUENS</p>
+                        <p className="pTitle text-3xl text-darkBlue sm:text-white lg:text-4xl ">HUYGUENS</p>
                         <p className="text-sm text-slate-400">Luxury Watches</p>
                     </div>
                 </div>

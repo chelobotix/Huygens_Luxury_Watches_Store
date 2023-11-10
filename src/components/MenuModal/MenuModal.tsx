@@ -27,7 +27,7 @@ const MenuModal: React.FC<MenuModalProps> = ({ isOpen, setIsOpen }) => {
                             <p className="text-sm text-slate-400">Luxury Watches</p>
                         </div>
                         <div className="h-[50px] w-1/5 border-[1px] border-softGray text-right">
-                            <button onClick={handleClose}>
+                            <button className="pr-2" onClick={handleClose}>
                                 <CloseIcon className="text-darkBlue" />
                             </button>
                         </div>
