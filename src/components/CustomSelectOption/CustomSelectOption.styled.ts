@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 
 const StyledContainer = styled.div`
-    width: auto;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
+    align-items: center;
     height: auto;
-    border-bottom: 1px solid #000000;
 
     hr {
         height: 0.5px;
@@ -17,9 +16,31 @@ const StyledContainer = styled.div`
         left: calc(50% + 2px);
     }
 
+    .title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .clicked {
+        text-decoration: underline;
+        font-weight: 700;
+        border: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .unclicked {
+        border-bottom: 1px solid #eaeaea;
+    }
+
     .searchContainer {
         ul {
             flex-direction: column;
+            align-items: center;
             list-style-type: none;
             background-color: #ffffff;
             z-index: 10;
@@ -30,6 +51,7 @@ const StyledContainer = styled.div`
                 white-space: nowrap;
                 padding: 5px;
                 font-size: 16px;
+                text-align: center;
 
                 &:hover {
                     cursor: pointer;
@@ -82,19 +104,16 @@ const StyledContainer = styled.div`
     }
 
     @media (min-width: 640px) {
-        border: none;
         .clicked {
             border-top: 2px solid #000000;
             border-left: 2px solid #000000;
             border-right: 2px solid #000000;
             border-bottom: none;
             padding-bottom: 10px;
-            background-color: #ffffff;
         }
 
         .unclicked {
             border: 1px solid #000000;
-            padding-bottom: 0;
         }
 
         .searchContainer {
@@ -105,7 +124,7 @@ const StyledContainer = styled.div`
                 border-bottom: 2px solid #000000;
                 padding: 0;
                 position: absolute;
-                top: 46px;
+
                 left: -2px;
                 width: calc(100% + 100%);
 

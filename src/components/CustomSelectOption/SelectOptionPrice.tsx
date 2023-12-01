@@ -56,20 +56,13 @@ const SelectOptionPrice: React.FC = () => {
     }
 
     return (
-        <StyledContainer>
-            <div ref={ref}>
-                <div ref={ref} className={`center-col ${clickStyle ? 'clicked' : 'unclicked'}`}>
-                    <Button
-                        fullWidth
-                        disableElevation
-                        onClick={handleClickButton}
-                        variant={isSmallScreen ? 'text' : 'contained'}
-                        color={isSmallScreen ? 'primary' : 'warning'}
-                        endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    >
-                        Price
-                    </Button>
+        <StyledContainer ref={ref}>
+            <div className="w-[90%]">
+                <div onClick={handleClickButton} className={`title w-52 ${clickStyle ? 'clicked' : 'unclicked'}`}>
+                    <p>Price</p>
+                    {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
+
                 <Fade in={isOpen}>
                     <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>
                         <hr className={isSmallScreen ? '' : 'hrTop'} />

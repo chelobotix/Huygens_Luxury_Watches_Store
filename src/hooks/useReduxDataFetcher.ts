@@ -2,11 +2,11 @@ import { fetchWatchesGet, type GlobalWatchState } from '../reducers/redux/watchS
 import { useAppSelector, useAppDispatch } from '../reducers/redux/store'
 import { useEffect } from 'react'
 
-const watchesURL = 'https://huygens.fly.dev/api/v1/watches'
-const brandsURL = 'https://huygens.fly.dev/api/v1/brands'
+// const watchesURL = 'https://huygens.fly.dev/api/v1/watches'
+// const brandsURL = 'https://huygens.fly.dev/api/v1/brands'
 
-// const watchesURL = 'http://127.0.0.1:3000/api/v1/watches'
-// const brandsURL = 'http://127.0.0.1:3000/api/v1/brands'
+const watchesURL = 'http://127.0.0.1:3000/api/v1/watches'
+const brandsURL = 'http://127.0.0.1:3000/api/v1/brands'
 const useReduxDataFetcher = (): GlobalWatchState => {
     const state = useAppSelector((state) => state.watch)
     const dispatch = useAppDispatch()

@@ -2,6 +2,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { Badge, Button, useMediaQuery } from '@mui/material'
 import Fade from '@mui/material/Fade'
+import Collapse from '@mui/material/Collapse'
 import { useClickAway } from '@uidotdev/usehooks'
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
@@ -31,7 +32,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const theme = createTheme()
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
-    const handleClickButton = (): void => {
+    const handleClick = (): void => {
         setIsOpen((prev) => !prev)
         setClickStyle(!clickStyle)
     }
@@ -78,25 +79,17 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     }
 
     return (
-        <StyledContainer>
-            <div ref={ref} className={`searchContainer center-col sm:relative ${clickStyle ? 'clicked' : 'unclicked'}`}>
-                <Badge badgeContent={badgeCounter} color="primary" invisible={!isMulti} sx={{ width: '100%' }}>
-                    <Button
-                        fullWidth
-                        disableElevation
-                        onClick={handleClickButton}
-                        variant={isSmallScreen ? 'text' : 'contained'}
-                        color={isSmallScreen ? 'primary' : 'warning'}
-                        endIcon={isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    >
-                        {_.startCase(title)}
-                    </Button>
-                </Badge>
-
-                <Fade in={isOpen}>
+        <StyledContainer ref={ref}>
+            <Badge badgeContent={badgeCounter} color="primary" invisible={!isMulti} sx={{ width: '90%' }}>
+                <div onClick={handleClick} className={`title ${clickStyle ? 'clicked' : 'unclicked'}`}>
+                    <p>{_.startCase(title)}</p>
+                    {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                </div>
+            </Badge>
+            <div className={`searchContainer sm:relative  ${isOpen ? 'flex' : 'hidden'}`}>
+                <Collapse in={isOpen} timeout={700}>
                     <div>
-                        <ul className={`${isOpen ? 'flex' : 'hidden'}`}>
-                            <hr />
+                        <ul>
                             {items.map((item) => (
                                 <li
                                     onClick={() => {
@@ -124,7 +117,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                             )}
                         </ul>
                     </div>
-                </Fade>
+                </Collapse>
             </div>
         </StyledContainer>
     )

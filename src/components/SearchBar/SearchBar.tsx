@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ options }) => {
                     Filter
                 </Button>
                 <ModalSearch isOpen={isOpen} setIsOpen={setIsOpen}>
-                    <div className="flex flex-col gap-2 py-2">
+                    <div className="flex flex-col py-2 lg:gap-2">
                         {Object.entries(options).map(([key, value]) => {
                             if (key === 'price') {
                                 return <SelectOptionPrice key={uuidv4()} />
