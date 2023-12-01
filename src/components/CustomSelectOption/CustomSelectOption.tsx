@@ -1,6 +1,6 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { Badge, Button, useMediaQuery } from '@mui/material'
+import { Badge, Button } from '@mui/material'
 import Collapse from '@mui/material/Collapse'
 import { useClickAway } from '@uidotdev/usehooks'
 import _ from 'lodash'
@@ -12,7 +12,6 @@ import { type ISearch } from '../../types/SearchInterface'
 import { filterString } from '../../helpers/filterString'
 import { getBadgeNumber } from '../../helpers/getBadgeNumber'
 import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
-import { createTheme } from '@mui/material/styles'
 
 interface CustomSelectOptionProps {
     title: string
@@ -26,10 +25,6 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
     const [selectedItems, setSelectedItems] = useState<string>(search[title as keyof ISearch])
     const [badgeCounter, setBadgeCounter] = useState<number>(0)
     const [clickStyle, setClickStyle] = useState(false)
-
-    // Detect screen size
-    const theme = createTheme()
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
     const handleClick = (): void => {
         setIsOpen((prev) => !prev)

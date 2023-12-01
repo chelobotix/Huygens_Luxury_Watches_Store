@@ -33,6 +33,7 @@ const SelectOptionPrice: React.FC = () => {
 
     const ref: any = useClickAway(() => {
         setIsOpen(false)
+        setClickStyle(false)
     })
 
     const handleClickButton = (): void => {
@@ -63,9 +64,8 @@ const SelectOptionPrice: React.FC = () => {
                     {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
 
-                <Collapse in={isOpen} timeout={700}>
+                <Collapse in={isOpen} timeout={isSmallScreen ? 700 : 0}>
                     <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>
-                        <hr className={isSmallScreen ? '' : 'hrTop'} />
                         <div className={isSmallScreen ? '' : 'priceContainer'}>
                             <Slider
                                 value={range}

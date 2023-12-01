@@ -33,7 +33,7 @@ const StyledContainer = styled.div`
             align-items: center;
             list-style-type: none;
             background-color: #ffffff;
-            z-index: 10;
+            z-index: 5;
             min-width: 100%;
 
             li {
@@ -97,6 +97,7 @@ const StyledContainer = styled.div`
     @media (min-width: 640px) {
         .title {
             width: 100%;
+            position: relative;
             display: flex;
             justify-content: center;
             gap: 5px;
@@ -116,7 +117,7 @@ const StyledContainer = styled.div`
             transition: none;
             padding: 5px 15px;
             padding-bottom: 10px;
-            z-index: 10;
+            z-index: 5;
         }
 
         .unclicked {
@@ -146,33 +147,17 @@ const StyledContainer = styled.div`
 
         .priceSearch {
             position: relative;
-            z-index: 10;
-            width: calc(100% * 3);
+            left: -20px;
+            top: -2px;
+            z-index: 2;
         }
 
         .priceContainer {
-            border-left: 2px solid #000000;
-            border-right: 2px solid #000000;
-            border-bottom: 2px solid #000000;
+            border: 1px solid #000000;
             position: absolute;
             background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            top: 0;
-            left: 0;
+            width: 400px;
             padding: 20px;
-            width: 100%;
-        }
-
-        .hrTop {
-            height: 0.5px;
-            background-color: black;
-            border: 1px solid #000000;
-            width: calc(67%);
-            position: absolute;
-            top: -2px;
-            left: calc(32% + 2px);
         }
     }
 `
