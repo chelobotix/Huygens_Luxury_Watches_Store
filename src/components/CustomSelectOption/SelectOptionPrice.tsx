@@ -2,7 +2,7 @@ import Slider from '@mui/material/Slider'
 import { useEffect, useState } from 'react'
 import { StyledContainer } from './CustomSelectOption.styled'
 import { useClickAway } from '@uidotdev/usehooks'
-import { Button, Fade, useMediaQuery } from '@mui/material'
+import { Button, Collapse, useMediaQuery } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { searchQueryConstructor } from '../../pages/Watches/searchQueryConstructor'
@@ -63,7 +63,7 @@ const SelectOptionPrice: React.FC = () => {
                     {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
 
-                <Fade in={isOpen}>
+                <Collapse in={isOpen} timeout={700}>
                     <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>
                         <hr className={isSmallScreen ? '' : 'hrTop'} />
                         <div className={isSmallScreen ? '' : 'priceContainer'}>
@@ -105,7 +105,7 @@ const SelectOptionPrice: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </Fade>
+                </Collapse>
             </div>
         </StyledContainer>
     )

@@ -6,16 +6,6 @@ const StyledContainer = styled.div`
     align-items: center;
     height: auto;
 
-    hr {
-        height: 0.5px;
-        background-color: black;
-        border: 1px solid #000000;
-        width: calc(50%);
-        position: absolute;
-        top: 0;
-        left: calc(50% + 2px);
-    }
-
     .title {
         width: 100%;
         display: flex;
@@ -102,35 +92,50 @@ const StyledContainer = styled.div`
     .selected {
         font-weight: bold;
     }
+    // MEDIA min-width: 640px
 
     @media (min-width: 640px) {
+        .title {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            align-items: center;
+            background-color: #ffffff;
+
+            p {
+                white-space: nowrap;
+            }
+        }
         .clicked {
-            border-top: 2px solid #000000;
-            border-left: 2px solid #000000;
-            border-right: 2px solid #000000;
+            border-top: 1px solid #000000;
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
             border-bottom: none;
+            font-weight: normal;
+            transition: none;
+            padding: 5px 15px;
             padding-bottom: 10px;
+            z-index: 10;
         }
 
         .unclicked {
             border: 1px solid #000000;
+            padding: 5px 15px;
         }
 
         .searchContainer {
+            width: 90%;
             ul {
-                border-top: none;
-                border-left: 2px solid #000000;
-                border-right: 2px solid #000000;
-                border-bottom: 2px solid #000000;
-                padding: 0;
+                border: 1px solid #000000;
                 position: absolute;
-
-                left: -2px;
-                width: calc(100% + 100%);
-
+                background-color: #ffffff;
+                top: -1px;
+                z-index: 1;
                 li {
-                    width: 100%;
+                    padding-right: 50px;
                     border-bottom: 1px solid #000000;
+                    text-align: left;
 
                     &:last-child {
                         border-bottom: none;

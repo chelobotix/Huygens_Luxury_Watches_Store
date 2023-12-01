@@ -1,7 +1,6 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import { Badge, Button, useMediaQuery } from '@mui/material'
-import Fade from '@mui/material/Fade'
 import Collapse from '@mui/material/Collapse'
 import { useClickAway } from '@uidotdev/usehooks'
 import _ from 'lodash'
@@ -86,37 +85,31 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                     {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
             </Badge>
-            <div className={`searchContainer sm:relative  ${isOpen ? 'flex' : 'hidden'}`}>
+            <div className={`searchContainer relative  ${isOpen ? 'flex' : 'hidden'}`}>
                 <Collapse in={isOpen} timeout={700}>
-                    <div>
-                        <ul>
-                            {items.map((item) => (
-                                <li
-                                    onClick={() => {
-                                        handleClickItem(item)
-                                    }}
-                                    key={uuidv4()}
-                                    className={selectedItems.includes(_.lowerCase(item)) ? 'selected' : ''}
-                                >
-                                    {_.startCase(item)}
-                                </li>
-                            ))}
-                            {isMulti && (
-                                <div className="buttonsContainer">
-                                    <Button onClick={handleClear} variant="contained" color="secondary">
-                                        Clear
-                                    </Button>
-                                    <Button
-                                        onClick={handleSave}
-                                        variant="contained"
-                                        disabled={selectedItems.length === 0}
-                                    >
-                                        Save
-                                    </Button>
-                                </div>
-                            )}
-                        </ul>
-                    </div>
+                    <ul>
+                        {items.map((item) => (
+                            <li
+                                onClick={() => {
+                                    handleClickItem(item)
+                                }}
+                                key={uuidv4()}
+                                className={selectedItems.includes(_.lowerCase(item)) ? 'selected' : ''}
+                            >
+                                {_.startCase(item)}
+                            </li>
+                        ))}
+                        {isMulti && (
+                            <div className="buttonsContainer">
+                                <Button onClick={handleClear} variant="contained" color="secondary">
+                                    Clear
+                                </Button>
+                                <Button onClick={handleSave} variant="contained" disabled={selectedItems.length === 0}>
+                                    Save
+                                </Button>
+                            </div>
+                        )}
+                    </ul>
                 </Collapse>
             </div>
         </StyledContainer>
