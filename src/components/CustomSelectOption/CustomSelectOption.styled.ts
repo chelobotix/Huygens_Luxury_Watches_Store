@@ -127,8 +127,13 @@ const StyledContainer = styled.div`
         .space {
             width: 90%;
             height: 20px;
-            background-color: aqua;
             z-index: 10;
+        }
+
+        .spacePrice {
+            width: 100%;
+            height: 20px;
+            z-index: 0;
         }
 
         .border1 {
@@ -166,17 +171,20 @@ const StyledContainer = styled.div`
 
         .priceSearch {
             position: relative;
-            left: -20px;
-            top: -2px;
-            z-index: 2;
+            width: 100%;
+            z-index: 1;
+            gap: 3px;
         }
 
         .priceContainer {
-            border: 1px solid #000000;
+            width: calc(100% * 2);
+            border: 2px solid #000000;
             position: absolute;
             background-color: #ffffff;
             width: 400px;
             padding: 20px;
+            top: -7px;
+            left: 0px;
         }
     }
 `
