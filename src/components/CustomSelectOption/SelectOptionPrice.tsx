@@ -63,6 +63,7 @@ const SelectOptionPrice: React.FC = () => {
                     <p>Price</p>
                     {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
+                <div className={`space hidden sm:block ${isOpen ? 'border1' : 'border2'}`}></div>
 
                 <Collapse in={isOpen} timeout={isSmallScreen ? 700 : 0}>
                     <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>

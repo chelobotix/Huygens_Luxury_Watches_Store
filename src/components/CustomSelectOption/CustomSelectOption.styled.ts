@@ -99,40 +99,59 @@ const StyledContainer = styled.div`
             width: 100%;
             position: relative;
             display: flex;
-            justify-content: center;
+            justify-content: start;
             gap: 5px;
             align-items: center;
             background-color: #ffffff;
-
+            padding: 5px 15px;
             p {
                 white-space: nowrap;
             }
         }
+        .unclicked {
+            outline: 1px solid #000000;
+        }
+
         .clicked {
-            border-top: 1px solid #000000;
-            border-left: 1px solid #000000;
-            border-right: 1px solid #000000;
-            border-bottom: none;
+            text-decoration: none;
+            box-shadow:
+                inset -2px 0 0 0 #0d0d0d,
+                inset 2px 0 0 0 #0d0d0d,
+                inset 0 2px 0 0 #0d0d0d,
+                inset 0 -2px 0 0 #fff;
             font-weight: normal;
             transition: none;
-            padding: 5px 15px;
-            padding-bottom: 10px;
             z-index: 5;
         }
 
-        .unclicked {
-            border: 1px solid #000000;
-            padding: 5px 15px;
+        .space {
+            width: 90%;
+            height: 20px;
+            background-color: aqua;
+            z-index: 10;
+        }
+
+        .border1 {
+            border-left: 2px solid #000000;
+            border-right: 2px solid #000000;
+            background-color: #ffffff;
+        }
+
+        .border2 {
+            border: none;
+            background-color: transparent;
         }
 
         .searchContainer {
             width: 90%;
             ul {
-                border: 1px solid #000000;
+                width: calc(100% * 2);
+                border: 2px solid #000000;
                 position: absolute;
                 background-color: #ffffff;
-                top: -1px;
-                z-index: 1;
+                border: 2px solid #000000;
+                top: -2px;
+
                 li {
                     padding-right: 50px;
                     border-bottom: 1px solid #000000;

@@ -80,6 +80,7 @@ const CustomSelectOption: React.FC<CustomSelectOptionProps> = ({ title, items, i
                     {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
             </Badge>
+            <div className={`space hidden sm:block ${isOpen ? 'border1' : 'border2'}`}></div>
             <div className={`searchContainer relative  ${isOpen ? 'flex' : 'hidden'}`}>
                 <Collapse in={isOpen} timeout={700}>
                     <ul>

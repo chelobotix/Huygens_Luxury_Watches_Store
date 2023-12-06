@@ -46,7 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ options }) => {
                 </ModalSearch>
             </div>
 
-            <div className="mb-2 hidden w-full flex-wrap justify-center gap-3 bg-softYellow p-5 shadow-inner sm:flex">
+            <div className="mb-2 hidden w-full flex-wrap items-center justify-center bg-softYellow p-5 shadow-inner sm:relative sm:flex sm:h-32">
                 {Object.entries(options).map(([key, value]) => {
                     if (key === 'price') {
                         return <SelectOptionPrice key={uuidv4()} />
