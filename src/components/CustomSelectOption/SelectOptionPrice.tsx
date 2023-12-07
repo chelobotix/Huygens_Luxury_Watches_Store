@@ -58,14 +58,14 @@ const SelectOptionPrice: React.FC = () => {
 
     return (
         <StyledContainer ref={ref}>
-            <div className="w-[90%] sm:w-auto">
+            <div className="sm:w-200px w-[90%]">
                 <div onClick={handleClickButton} className={`title w-52 ${clickStyle ? 'clicked' : 'unclicked'}`}>
                     <p>Price</p>
                     {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
                 <div className={`spacePrice hidden sm:block ${isOpen ? 'border1' : 'border2'}`}></div>
 
-                <div className={`w-full justify-center ${isOpen ? 'flex' : 'hidden'}`}>
+                <div className={`relative w-full justify-center ${isOpen ? 'flex' : 'hidden'}`}>
                     <Collapse in={isOpen} timeout={isSmallScreen ? 700 : 0}>
                         <div className="priceContainer">
                             <Slider

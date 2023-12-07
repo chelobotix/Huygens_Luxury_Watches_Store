@@ -5,6 +5,9 @@ const StyledContainer = styled.div`
     flex-direction: column;
     align-items: center;
     height: auto;
+    &:hover {
+        cursor: pointer;
+    }
 
     .title {
         width: 100%;
@@ -55,6 +58,9 @@ const StyledContainer = styled.div`
         background-color: #ffffff;
         width: 280px;
         padding: 20px;
+        &:hover {
+            cursor: default;
+        }
 
         .minMax {
             display: flex;
@@ -172,7 +178,6 @@ const StyledContainer = styled.div`
         }
 
         .priceContainer {
-            width: calc(100% * 2);
             border: 2px solid #000000;
             position: absolute;
             background-color: #ffffff;
