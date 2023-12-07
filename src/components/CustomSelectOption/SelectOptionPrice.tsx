@@ -58,16 +58,16 @@ const SelectOptionPrice: React.FC = () => {
 
     return (
         <StyledContainer ref={ref}>
-            <div className="w-[90%]">
+            <div className="w-[90%] sm:w-auto">
                 <div onClick={handleClickButton} className={`title w-52 ${clickStyle ? 'clicked' : 'unclicked'}`}>
                     <p>Price</p>
                     {isOpen ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </div>
                 <div className={`spacePrice hidden sm:block ${isOpen ? 'border1' : 'border2'}`}></div>
 
-                <Collapse in={isOpen} timeout={isSmallScreen ? 700 : 0}>
-                    <div className={`priceSearch ${isOpen ? 'flex' : 'hidden'}`}>
-                        <div className={isSmallScreen ? '' : 'priceContainer'}>
+                <div className={`w-full justify-center ${isOpen ? 'flex' : 'hidden'}`}>
+                    <Collapse in={isOpen} timeout={isSmallScreen ? 700 : 0}>
+                        <div className="priceContainer">
                             <Slider
                                 value={range}
                                 min={0}
@@ -81,7 +81,7 @@ const SelectOptionPrice: React.FC = () => {
                                     <p className="priceTitle">Min price</p>
                                     <div className="amountContainer">
                                         <p>{range[0].toLocaleString()}</p>
-                                        <p>USD</p>
+                                        <p className="text-xs">USD</p>
                                     </div>
                                 </div>
                                 <div>
@@ -92,7 +92,7 @@ const SelectOptionPrice: React.FC = () => {
                                                 ? `${range[1].toLocaleString()}+`
                                                 : range[1].toLocaleString()}
                                         </p>
-                                        <p>USD</p>
+                                        <p className="text-xs">USD</p>
                                     </div>
                                 </div>
                             </div>
@@ -105,8 +105,8 @@ const SelectOptionPrice: React.FC = () => {
                                 </Button>
                             </div>
                         </div>
-                    </div>
-                </Collapse>
+                    </Collapse>
+                </div>
             </div>
         </StyledContainer>
     )

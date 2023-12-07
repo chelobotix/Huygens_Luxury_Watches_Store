@@ -51,15 +51,16 @@ const StyledContainer = styled.div`
         }
     }
 
-    .priceSearch {
-        flex-direction: column;
-        padding: 0 20px;
-        gap: 10px;
+    .priceContainer {
+        background-color: #ffffff;
+        width: 280px;
+        padding: 20px;
 
         .minMax {
             display: flex;
             justify-content: center;
             gap: 15px;
+            margin-bottom: 15px;
 
             > div {
                 border: 1px solid #000000;
@@ -69,7 +70,7 @@ const StyledContainer = styled.div`
                 height: 50px;
 
                 .priceTitle {
-                    font-size: 12px;
+                    font-size: 10px;
                     padding-left: 9px;
                     color: ${(props) => props.theme.colors.darkGray};
                 }
@@ -133,7 +134,8 @@ const StyledContainer = styled.div`
         .spacePrice {
             width: 100%;
             height: 20px;
-            z-index: 0;
+            z-index: 10;
+            position: relative;
         }
 
         .border1 {
@@ -169,13 +171,6 @@ const StyledContainer = styled.div`
             }
         }
 
-        .priceSearch {
-            position: relative;
-            width: 100%;
-            z-index: 1;
-            gap: 3px;
-        }
-
         .priceContainer {
             width: calc(100% * 2);
             border: 2px solid #000000;
@@ -183,8 +178,9 @@ const StyledContainer = styled.div`
             background-color: #ffffff;
             width: 400px;
             padding: 20px;
-            top: -7px;
+            top: -2px;
             left: 0px;
+            z-index: 5;
         }
     }
 `
